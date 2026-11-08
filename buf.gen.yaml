@@ -1,0 +1,12 @@
+# TypeScript client generated from the backend's Protocol Buffers contract.
+# Run `npm run generate` after the contract changes.
+version: v2
+inputs:
+  - git_repo: https://github.com/UbeimarY/subastacampo-backend.git
+    branch: main
+    subdir: proto
+plugins:
+  - local: protoc-gen-es
+    out: src/app/gen
+    opt: target=ts
+clean: true
