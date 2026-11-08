@@ -1,0 +1,201 @@
+<section class="page">
+  <a class="back" routerLink="/">Volver a las subastas</a>
+
+  @if (streamError(); as message) {
+    <div class="panel empty">
+      <p>{{ message }}</p>
+      <a class="button" routerLink="/">Ver subastas en vivo</a>
+    </div>
+  } @else if (auction(); as auction) {
+    <header class="lot">
+      <div>
+        <h1>{{ auction.product?.name }}</h1>
+        <p class="lot__meta">
+          {{ formatQuantity(auction.product?.quantity ?? 0, auction.product?.unit ?? 0) }}
+          · {{ CATEGORY_LABELS[auction.product?.category ?? 0] }} · Cosechado el
+          {{ formatDay(auction.product?.harvestDate) }} ·
+          {{ auction.product?.remainingShelfLifeDays }} días de vida útil
+        </p>
+        @if (auction.product?.description) {
+          <p class="lot__description">{{ auction.product?.description }}</p>
+        }
+      </div>
+      <span class="connection" [class]="'connection connection--' + connection()" role="status">
+        @if (connection() === 'live') {
+          <span class="live-dot" aria-hidden="true"></span>
+        }
+        {{ connectionLabel() }}
+      </span>
+    </header>
+
+    <div class="layout">
+      <div class="board" [class.board--pulse]="pulse()">
+        <div class="board__stripe" aria-hidden="true"></div>
+        <div class="board__body">
+          <p class="board__label">
+            {{ auction.bidCount === 0 ? 'Precio inicial' : 'Puja más alta' }}
+          </p>
+          <p class="board__price money" aria-live="polite">{{ formatCop(auction.currentPrice) }}</p>
+
+          <dl class="board__facts">
+            <div>
+              <dt>{{ isActive() ? 'Cierra en' : 'Estado' }}</dt>
+              <dd>
+                @if (isActive()) {
+                  <app-countdown [endsAt]="auction.endsAt" />
+                } @else {
+                  Cerrada
+                }
+              </dd>
+            </div>
+            <div>
+              <dt>Pujas</dt>
+              <dd class="money">{{ auction.bidCount }}</dd>
+            </div>
+            <div>
+              <dt>Puja mínima</dt>
+              <dd class="money">{{ formatCop(auction.nextMinBid) }}</dd>
+            </div>
+          </dl>
+
+          @if (auction.extensionCount > 0) {
+            <p class="board__note">
+              El cierre se extendió {{ auction.extensionCount }}
+              {{ auction.extensionCount === 1 ? 'vez' : 'veces' }}
+              por pujas de último minuto.
+            </p>
+          }
+        </div>
+      </div>
+
+      <aside class="side">
+        @if (result(); as result) {
+          <div class="result" [class.result--won]="result.kind === 'won'" role="status">
+            @switch (result.kind) {
+              @case ('won') {
+                <h2>Ganaste esta subasta</h2>
+                <p>
+                  Tu puja de {{ formatCop(auction.currentPrice) }} fue la más alta. El productor se
+                  pondrá en contacto contigo.
+                </p>
+              }
+              @case ('other') {
+                <h2>Subasta cerrada</h2>
+                <p>
+                  Ganó el postor #{{ result.bidderNumber }} con
+                  {{ formatCop(auction.currentPrice) }}.
+                </p>
+              }
+              @case ('empty') {
+                <h2>Subasta cerrada sin pujas</h2>
+                <p>Nadie pujó por este lote.</p>
+              }
+            }
+          </div>
+        } @else if (canBid()) {
+          <form class="panel bid" (submit)="$event.preventDefault(); placeBid()">
+            <h2>Tu puja</h2>
+            <div class="quick" role="group" aria-label="Montos sugeridos">
+              @for (value of quickBids(); track value) {
+                <button
+                  type="button"
+                  class="quick__option"
+                  (click)="chooseAmount(value)"
+                  [attr.aria-pressed]="amount() === value.toString()"
+                >
+                  {{ formatCop(value) }}
+                </button>
+              }
+            </div>
+            <div class="field">
+              <label for="amount">Otro monto (pesos)</label>
+              <input
+                id="amount"
+                inputmode="numeric"
+                autocomplete="off"
+                [value]="amount()"
+                (input)="onAmountInput($event)"
+                aria-describedby="amount-hint"
+              />
+              <span class="hint" id="amount-hint"
+                >Mínimo {{ formatCop(minimum()) }}. Sube de a {{ formatCop(increment()) }} o
+                más.</span
+              >
+            </div>
+            @if (bidError()) {
+              <p class="alert" role="alert">{{ bidError() }}</p>
+            }
+            @if (bidSuccess()) {
+              <p class="notice" role="status">{{ bidSuccess() }}</p>
+            }
+            <button class="button button--block button--bid" type="submit" [disabled]="placing()">
+              {{ placing() ? 'Enviando puja…' : 'Pujar ' + amountLabel() }}
+            </button>
+          </form>
+        } @else if (isActive()) {
+          <div class="panel">
+            @if (!session.isSignedIn()) {
+              <h2>¿Quieres pujar?</h2>
+              <p>Ingresa con una cuenta de comprador para participar.</p>
+              <a
+                class="button button--block"
+                routerLink="/ingresar"
+                [queryParams]="{ volver: '/subastas/' + auction.id }"
+                >Ingresar</a
+              >
+            } @else if (isOwner()) {
+              <h2>Esta es tu subasta</h2>
+              <p>Ves cada puja en vivo y su nivel de riesgo. Solo tú puedes ver el riesgo.</p>
+            } @else {
+              <h2>Modo observador</h2>
+              <p>Solo las cuentas de comprador pueden pujar.</p>
+            }
+          </div>
+        }
+      </aside>
+    </div>
+
+    <section class="history" aria-labelledby="history-title">
+      <h2 id="history-title">Pujas</h2>
+      @if (bids().length === 0) {
+        <p class="empty panel">
+          Aún no hay pujas. {{ isActive() ? 'La primera puede igualar el precio inicial.' : '' }}
+        </p>
+      } @else {
+        <ol class="bids">
+          @for (bid of bids(); track bid.id; let first = $first) {
+            <li class="bid-row" [class.bid-row--top]="first" [class.bid-row--mine]="isMine(bid)">
+              <span class="bid-row__who">
+                <strong>{{ isMine(bid) ? 'Tú' : 'Postor #' + bid.bidderNumber }}</strong>
+                <span class="bid-row__time">{{ formatTime(bid.placedAt) }}</span>
+              </span>
+              <span class="bid-row__amount money">{{ formatCop(bid.amount) }}</span>
+              <span class="bid-row__tags">
+                @if (bid.extendedClose) {
+                  <span class="tag">Extendió el cierre</span>
+                }
+                @if (isOwner() && bid.risk) {
+                  <span
+                    [class]="riskClass(bid.risk.level)"
+                    [title]="'Puntaje ' + bid.risk.score + ' de 100'"
+                  >
+                    {{ RISK_LEVEL_LABELS[bid.risk.level] }} · {{ bid.risk.score }}
+                  </span>
+                }
+              </span>
+              @if (isOwner() && bid.risk && bid.risk.signals.length > 0) {
+                <ul class="signals">
+                  @for (signal of bid.risk.signals; track signal) {
+                    <li>{{ RISK_SIGNAL_LABELS[signal] }}</li>
+                  }
+                </ul>
+              }
+            </li>
+          }
+        </ol>
+      }
+    </section>
+  } @else {
+    <p class="empty" role="status">Abriendo la sala de subasta…</p>
+  }
+</section>
