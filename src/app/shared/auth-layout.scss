@@ -1,0 +1,23 @@
+:host {
+  display: block;
+}
+
+.auth {
+  max-width: 460px;
+  margin: 0 auto;
+  padding: 40px var(--gutter) 64px;
+}
+
+.auth h1 {
+  margin-bottom: 6px;
+}
+
+.auth .lede {
+  margin-bottom: 24px;
+}
+
+.auth__switch {
+  margin-top: 20px;
+  text-align: center;
+  color: var(--ink-soft);
+}
