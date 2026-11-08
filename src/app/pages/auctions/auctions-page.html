@@ -1,0 +1,119 @@
+<section class="page">
+  <div class="intro">
+    <div>
+      <h1>{{ heading() }}</h1>
+      @if (!myBids()) {
+        <p class="lede">
+          Productores de Nariño venden su cosecha al mejor postor. Las pujas llegan en vivo a todas
+          las pantallas.
+        </p>
+      }
+    </div>
+    @if (session.isProducer()) {
+      <a class="button" routerLink="/publicar">Publicar cosecha</a>
+    }
+  </div>
+
+  @if (!myBids()) {
+    <div class="tabs" role="tablist" aria-label="Filtrar subastas">
+      <button
+        type="button"
+        role="tab"
+        [attr.aria-selected]="tab() === 'live'"
+        (click)="select('live')"
+      >
+        <span class="live-dot" aria-hidden="true"></span> En vivo
+      </button>
+      <button
+        type="button"
+        role="tab"
+        [attr.aria-selected]="tab() === 'closed'"
+        (click)="select('closed')"
+      >
+        Cerradas
+      </button>
+      @if (session.isProducer()) {
+        <button
+          type="button"
+          role="tab"
+          [attr.aria-selected]="tab() === 'mine'"
+          (click)="select('mine')"
+        >
+          De mis productos
+        </button>
+      }
+    </div>
+  }
+
+  @if (error()) {
+    <p class="alert" role="alert">
+      {{ error() }}
+      <button type="button" class="button button--quiet retry" (click)="load()">Reintentar</button>
+    </p>
+  }
+
+  @if (loading() && items().length === 0) {
+    <p class="empty" role="status">Cargando subastas…</p>
+  } @else if (items().length === 0 && !error()) {
+    <div class="empty panel">
+      @if (myBids()) {
+        <p>Todavía no has pujado en ninguna subasta.</p>
+        <a class="button" routerLink="/">Ver subastas en vivo</a>
+      } @else if (tab() === 'live') {
+        <p>No hay subastas en vivo en este momento.</p>
+        @if (session.isProducer()) {
+          <a class="button" routerLink="/publicar">Subasta tu cosecha</a>
+        }
+      } @else {
+        <p>No hay subastas para mostrar.</p>
+      }
+    </div>
+  } @else {
+    <ol class="board" aria-live="polite">
+      @for (auction of items(); track auction.id) {
+        <li>
+          <a class="row" [routerLink]="['/subastas', auction.id]">
+            <span class="row__product">
+              <strong>{{ auction.product?.name }}</strong>
+              <span class="row__meta">
+                {{ formatQuantity(auction.product?.quantity ?? 0, auction.product?.unit ?? 0) }}
+                · {{ CATEGORY_LABELS[auction.product?.category ?? 0] }}
+              </span>
+            </span>
+            <span class="row__price">
+              <span class="row__label">{{
+                auction.bidCount === 0 ? 'Precio inicial' : 'Puja más alta'
+              }}</span>
+              <span class="money">{{ formatCop(auction.currentPrice) }}</span>
+            </span>
+            <span class="row__bids">
+              <span class="row__label">Pujas</span>
+              <span class="money">{{ auction.bidCount }}</span>
+            </span>
+            <span class="row__time">
+              @if (auction.status === AuctionStatus.ACTIVE) {
+                <span class="row__label">Cierra en</span>
+                <app-countdown [endsAt]="auction.endsAt" />
+              } @else {
+                <span class="status">{{ STATUS_LABELS[auction.status] }}</span>
+              }
+            </span>
+          </a>
+        </li>
+      }
+    </ol>
+
+    @if (nextPageToken()) {
+      <div class="more">
+        <button
+          type="button"
+          class="button button--quiet"
+          (click)="loadMore()"
+          [disabled]="loading()"
+        >
+          Ver más subastas
+        </button>
+      </div>
+    }
+  }
+</section>
