@@ -1,0 +1,137 @@
+.steps {
+  display: flex;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px;
+  counter-reset: step;
+
+  li {
+    counter-increment: step;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--ink-soft);
+    font-weight: 700;
+
+    &::before {
+      content: counter(step);
+      display: inline-grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1.5px solid var(--line);
+      background: var(--surface);
+    }
+
+    & + li::after {
+      content: none;
+    }
+  }
+
+  li + li {
+    margin-left: 16px;
+  }
+
+  .is-current {
+    color: var(--ink);
+
+    &::before {
+      background: var(--paramo);
+      border-color: var(--paramo);
+      color: #fff;
+    }
+  }
+}
+
+.price-step {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.lot {
+  color: var(--ink-soft);
+}
+
+.suggestion__price {
+  font-size: clamp(2.2rem, 6vw, 3.4rem);
+  line-height: 1;
+  margin: 8px 0 6px;
+  color: var(--paramo-deep);
+}
+
+.suggestion__per-kg {
+  color: var(--ink-soft);
+}
+
+.range {
+  margin: 20px 0;
+}
+
+.range__track {
+  position: relative;
+  height: 12px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--paramo-wash), var(--maize) 50%, var(--paramo-wash));
+}
+
+.range__marker {
+  position: absolute;
+  top: 50%;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--paramo-deep);
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 1px var(--paramo-deep);
+  transform: translate(-50%, -50%);
+}
+
+.range__labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums;
+  font-weight: 650;
+}
+
+.factors {
+  padding-left: 20px;
+  margin: 0 0 16px;
+
+  li + li {
+    margin-top: 6px;
+  }
+}
+
+.model {
+  color: var(--ink-soft);
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.link-button {
+  font: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  color: var(--paramo-deep);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+h3 {
+  font-size: 1.05rem;
+  margin-top: 8px;
+}
+
+@media (max-width: 860px) {
+  .price-step {
+    grid-template-columns: 1fr;
+  }
+}

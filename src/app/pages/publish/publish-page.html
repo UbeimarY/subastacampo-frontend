@@ -1,0 +1,218 @@
+<section class="page">
+  <h1>Publicar cosecha</h1>
+  <p class="lede">
+    Cuéntanos qué cosechaste. Te sugerimos un precio con inteligencia artificial y abres la subasta
+    en vivo.
+  </p>
+
+  <ol class="steps" aria-label="Pasos">
+    <li
+      [class.is-current]="step() === 'product'"
+      [attr.aria-current]="step() === 'product' ? 'step' : null"
+    >
+      Tu cosecha
+    </li>
+    <li
+      [class.is-current]="step() === 'price'"
+      [attr.aria-current]="step() === 'price' ? 'step' : null"
+    >
+      Precio y subasta
+    </li>
+  </ol>
+
+  @if (step() === 'product') {
+    <form class="panel form" [formGroup]="productForm" (ngSubmit)="publishProduct()" novalidate>
+      <div class="field">
+        <label for="name">Producto</label>
+        <input
+          id="name"
+          formControlName="name"
+          placeholder="Papa pastusa de primera"
+          [attr.aria-invalid]="invalid('name')"
+        />
+        @if (invalid('name')) {
+          <span class="field-error">Escribe el nombre del producto (2 a 150 caracteres).</span>
+        }
+      </div>
+
+      <div class="field">
+        <label for="description">Descripción <span class="hint">(opcional)</span></label>
+        <textarea
+          id="description"
+          formControlName="description"
+          placeholder="Variedad, calidad, vereda, condiciones de entrega…"
+        ></textarea>
+      </div>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="category">Categoría</label>
+          <select id="category" formControlName="category">
+            @for (option of CATEGORY_OPTIONS; track option.value) {
+              <option [ngValue]="option.value">{{ option.label }}</option>
+            }
+          </select>
+        </div>
+        <div class="field">
+          <label for="quantity">Cantidad</label>
+          <input
+            id="quantity"
+            type="number"
+            inputmode="decimal"
+            min="0.01"
+            step="0.01"
+            formControlName="quantity"
+            [attr.aria-invalid]="invalid('quantity')"
+          />
+          @if (invalid('quantity')) {
+            <span class="field-error">La cantidad debe ser mayor que cero.</span>
+          }
+        </div>
+        <div class="field">
+          <label for="unit">Unidad</label>
+          <select id="unit" formControlName="unit">
+            @for (option of UNIT_OPTIONS; track option.value) {
+              <option [ngValue]="option.value">{{ option.label }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="harvestDate">Fecha de cosecha</label>
+          <input
+            id="harvestDate"
+            type="date"
+            [max]="today"
+            formControlName="harvestDate"
+            [attr.aria-invalid]="invalid('harvestDate')"
+          />
+        </div>
+        <div class="field">
+          <label for="shelfLifeDays">Vida útil (días)</label>
+          <span class="hint" id="shelf-hint">Cuántos días se conserva desde la cosecha.</span>
+          <input
+            id="shelfLifeDays"
+            type="number"
+            inputmode="numeric"
+            min="1"
+            max="365"
+            formControlName="shelfLifeDays"
+            aria-describedby="shelf-hint"
+            [attr.aria-invalid]="invalid('shelfLifeDays')"
+          />
+          @if (invalid('shelfLifeDays')) {
+            <span class="field-error">Entre 1 y 365 días.</span>
+          }
+        </div>
+      </div>
+
+      @if (error()) {
+        <p class="alert" role="alert">{{ error() }}</p>
+      }
+
+      <button class="button button--block" type="submit" [disabled]="busy()">
+        {{ busy() ? 'Publicando…' : 'Publicar y ver precio sugerido' }}
+      </button>
+    </form>
+  } @else if (product(); as product) {
+    <div class="price-step">
+      <section class="panel suggestion" aria-labelledby="suggestion-title">
+        <h2 id="suggestion-title">Precio sugerido para tu lote</h2>
+        <p class="lot">
+          {{ product.name }} · {{ formatQuantity(product.quantity, product.unit) }} ·
+          {{ CATEGORY_LABELS[product.category] }}
+        </p>
+
+        @if (suggestion(); as suggestion) {
+          <p class="suggestion__price money">{{ formatCop(suggestion.suggestedPrice) }}</p>
+          <p class="suggestion__per-kg">
+            {{ formatCop(suggestion.pricePerKg) }} por kilo ·
+            {{ formatNumber(suggestion.quantityKg) }} kg en total
+          </p>
+
+          <figure class="range">
+            <div class="range__track" aria-hidden="true">
+              <span class="range__marker" [style.left.%]="markerPosition()"></span>
+            </div>
+            <figcaption class="range__labels">
+              <span>{{ formatCop(suggestion.rangeMin) }}</span>
+              <span>{{ formatCop(suggestion.rangeMax) }}</span>
+            </figcaption>
+            <p class="hint">
+              Rango probable que estima el modelo para lotes parecidos (percentiles 10 y 90).
+            </p>
+          </figure>
+
+          @if (suggestion.factors.length > 0) {
+            <h3>Por qué este precio</h3>
+            <ul class="factors">
+              @for (factor of suggestion.factors; track factor.code) {
+                <li>{{ describeFactor(factor) }}</li>
+              }
+            </ul>
+          }
+          <p class="model">
+            Modelo {{ suggestion.modelVersion }} · es una referencia: tú decides el precio.
+          </p>
+        } @else if (suggestionError()) {
+          <p class="alert" role="alert">
+            No pudimos calcular el precio sugerido: {{ suggestionError() }} Puedes fijarlo tú mismo.
+          </p>
+        } @else {
+          <p role="status">Calculando el precio con el modelo…</p>
+        }
+      </section>
+
+      <form class="panel form" [formGroup]="auctionForm" (ngSubmit)="startAuction()" novalidate>
+        <h2>Abrir la subasta</h2>
+        <div class="field">
+          <label for="startingPrice">Precio inicial (pesos)</label>
+          <span class="hint"
+            >Empezar un poco abajo atrae más pujas.
+            @if (suggestion()) {
+              <button type="button" class="link-button" (click)="useSuggested()">
+                Usar el precio sugerido
+              </button>
+            }
+          </span>
+          <input id="startingPrice" inputmode="numeric" formControlName="startingPrice" />
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="minIncrement">Incremento mínimo (pesos)</label>
+            <input id="minIncrement" inputmode="numeric" formControlName="minIncrement" />
+          </div>
+          <div class="field">
+            <label for="duration">Duración</label>
+            <select id="duration" formControlName="durationSeconds">
+              @for (option of DURATION_OPTIONS; track option.seconds) {
+                <option [ngValue]="option.seconds">{{ option.label }}</option>
+              }
+            </select>
+          </div>
+        </div>
+        <p class="hint">
+          Si alguien puja en los últimos 2 minutos, el cierre se extiende para que todos puedan
+          responder.
+        </p>
+
+        @if (error()) {
+          <p class="alert" role="alert">{{ error() }}</p>
+        }
+
+        <button class="button button--block" type="submit" [disabled]="busy()">
+          {{ busy() ? 'Abriendo la subasta…' : 'Abrir la subasta en vivo' }}
+        </button>
+        <a class="button button--quiet button--block" routerLink="/mis-productos"
+          >Subastar más tarde</a
+        >
+      </form>
+    </div>
+  } @else if (busy()) {
+    <p class="empty" role="status">Cargando el producto…</p>
+  } @else if (error()) {
+    <p class="alert" role="alert">{{ error() }}</p>
+  }
+</section>
