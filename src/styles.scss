@@ -1,0 +1,290 @@
+/*
+ * SubastaCampo visual system.
+ * Palette: Andean páramo greens with the red and yellow of Pasto's barniz (mopa-mopa).
+ * Red is reserved for what is live; yellow for prices.
+ */
+:root {
+  --ink: #17241e;
+  --ink-soft: #4a5a52;
+  --mist: #eef2ee;
+  --surface: #ffffff;
+  --line: #d5ddd7;
+  --paramo: #2f6b4f;
+  --paramo-deep: #1f4c37;
+  --paramo-wash: #e1ede6;
+  --barniz: #c42b1c;
+  --barniz-wash: #fbe9e6;
+  --maize: #e9b10a;
+  --maize-wash: #fdf4d4;
+  --danger: #a3241a;
+
+  --font-display: 'Bricolage Grotesque Variable', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Atkinson Hyperlegible', 'Segoe UI', system-ui, sans-serif;
+
+  --radius-s: 6px;
+  --radius-m: 12px;
+  --gutter: clamp(16px, 4vw, 32px);
+  --content: 1080px;
+
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--mist);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  line-height: 1.15;
+  margin: 0 0 0.5em;
+  letter-spacing: -0.01em;
+}
+
+h1 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 1.375rem;
+  font-weight: 650;
+}
+
+p {
+  margin: 0 0 1em;
+}
+
+a {
+  color: var(--paramo-deep);
+  text-underline-offset: 3px;
+}
+
+:focus-visible {
+  outline: 3px solid var(--maize);
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -60px;
+  padding: 10px 16px;
+  background: var(--ink);
+  color: #fff;
+  z-index: 10;
+  border-radius: var(--radius-s);
+
+  &:focus {
+    top: 12px;
+  }
+}
+
+.page {
+  max-width: var(--content);
+  margin: 0 auto;
+  padding: 28px var(--gutter) 64px;
+}
+
+.lede {
+  color: var(--ink-soft);
+  max-width: 62ch;
+}
+
+.money {
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+/* ---------- Panels ---------- */
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  padding: clamp(18px, 3vw, 28px);
+}
+
+/* ---------- Forms ---------- */
+.form {
+  display: grid;
+  gap: 18px;
+}
+
+.form-row {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+
+  label {
+    font-weight: 700;
+  }
+
+  .hint {
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+  }
+
+  .field-error {
+    color: var(--danger);
+    font-size: 0.95rem;
+  }
+}
+
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 14px;
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-s);
+
+  &:hover {
+    border-color: #b3c0b7;
+  }
+
+  &:focus-visible {
+    outline: none;
+    border-color: var(--paramo);
+    box-shadow: 0 0 0 3px var(--paramo-wash);
+  }
+
+  &[aria-invalid='true'] {
+    border-color: var(--danger);
+  }
+}
+
+textarea {
+  min-height: 96px;
+  resize: vertical;
+}
+
+/* ---------- Buttons ---------- */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 10px 22px;
+  border: 1.5px solid transparent;
+  border-radius: var(--radius-s);
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  background: var(--paramo);
+  color: #fff;
+  transition: background-color 120ms ease;
+
+  &:hover {
+    background: var(--paramo-deep);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+}
+
+.button--quiet {
+  background: transparent;
+  color: var(--paramo-deep);
+  border-color: var(--line);
+
+  &:hover {
+    background: var(--paramo-wash);
+  }
+}
+
+.button--block {
+  width: 100%;
+}
+
+/* ---------- Feedback ---------- */
+.alert {
+  padding: 12px 16px;
+  border-radius: var(--radius-s);
+  border-left: 4px solid var(--danger);
+  background: var(--barniz-wash);
+  color: var(--danger);
+}
+
+.notice {
+  padding: 12px 16px;
+  border-radius: var(--radius-s);
+  border-left: 4px solid var(--paramo);
+  background: var(--paramo-wash);
+}
+
+.empty {
+  padding: 32px;
+  text-align: center;
+  color: var(--ink-soft);
+}
+
+/* ---------- Live marker ---------- */
+.live-dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--barniz);
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+/* ---------- Countdown ---------- */
+.countdown {
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums;
+  font-weight: 650;
+}
+
+.countdown--urgent {
+  color: var(--barniz);
+}
+
+.countdown--over {
+  color: var(--ink-soft);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
