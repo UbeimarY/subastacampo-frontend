@@ -1,0 +1,132 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.topbar {
+  background: var(--paramo-deep);
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+.topbar__inner {
+  max-width: var(--content);
+  margin: 0 auto;
+  padding: 10px var(--gutter);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 24px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-weight: 750;
+  font-size: 1.25rem;
+  margin-right: auto;
+}
+
+.brand__mark {
+  width: 30px;
+  height: 30px;
+  color: var(--maize);
+}
+
+.nav,
+.account {
+  display: flex;
+  align-items: center;
+  gap: 4px 18px;
+  flex-wrap: wrap;
+
+  a {
+    color: #e6efe9;
+    text-decoration: none;
+    padding: 10px 2px;
+    border-bottom: 2px solid transparent;
+
+    &:hover {
+      color: #fff;
+    }
+
+    &.is-active {
+      color: #fff;
+      border-bottom-color: var(--maize);
+    }
+  }
+}
+
+.nav__cta {
+  font-weight: 700;
+}
+
+.account__name {
+  color: #e6efe9;
+}
+
+.account__out {
+  font: inherit;
+  color: #fff;
+  background: transparent;
+  border: 1px solid rgb(255 255 255 / 40%);
+  border-radius: var(--radius-s);
+  min-height: 40px;
+  padding: 6px 14px;
+  cursor: pointer;
+
+  &:hover {
+    background: rgb(255 255 255 / 10%);
+  }
+}
+
+.account .account__join {
+  background: var(--maize);
+  color: var(--ink);
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: var(--radius-s);
+  border: 0;
+
+  &:hover {
+    color: var(--ink);
+    background: #f4c63b;
+  }
+}
+
+.footer {
+  border-top: 1px solid var(--line);
+  padding: 20px var(--gutter) 28px;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  text-align: center;
+
+  p {
+    margin: 0 auto 6px;
+    max-width: 70ch;
+  }
+}
+
+@media (max-width: 640px) {
+  .nav {
+    order: 3;
+    width: 100%;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+  }
+}

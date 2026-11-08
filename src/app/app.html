@@ -1,0 +1,72 @@
+<a class="skip-link" href="#main">Ir al contenido</a>
+
+<header class="topbar">
+  <div class="topbar__inner">
+    <a class="brand" routerLink="/" aria-label="SubastaCampo, inicio">
+      <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true">
+        <path
+          d="M5 23h22M7 23l5-10 4 6 3-4 6 8"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <circle cx="23" cy="9" r="3" fill="var(--barniz)" />
+      </svg>
+      <span>SubastaCampo</span>
+    </a>
+
+    <nav class="nav" aria-label="Principal">
+      <a
+        routerLink="/"
+        routerLinkActive="is-active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        ariaCurrentWhenActive="page"
+        >Subastas</a
+      >
+      @if (session.isProducer()) {
+        <a routerLink="/mis-productos" routerLinkActive="is-active" ariaCurrentWhenActive="page"
+          >Mis productos</a
+        >
+        <a
+          class="nav__cta"
+          routerLink="/publicar"
+          routerLinkActive="is-active"
+          ariaCurrentWhenActive="page"
+          >Publicar cosecha</a
+        >
+      }
+      @if (session.isBuyer()) {
+        <a routerLink="/mis-pujas" routerLinkActive="is-active" ariaCurrentWhenActive="page"
+          >Mis pujas</a
+        >
+      }
+    </nav>
+
+    <div class="account">
+      @if (session.user(); as user) {
+        <span class="account__name">{{ firstName(user.fullName) }}</span>
+        <button type="button" class="account__out" (click)="signOut()">Salir</button>
+      } @else {
+        <a routerLink="/ingresar">Ingresar</a>
+        <a class="account__join" routerLink="/registro">Crear cuenta</a>
+      }
+    </div>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+  <router-outlet />
+</main>
+
+<footer class="footer">
+  <p>
+    El precio sugerido lo calcula un modelo de inteligencia artificial: es una referencia, tú
+    decides el precio.
+  </p>
+  <p>
+    Proyecto académico · Programación Orientada a la Web · Universidad Cooperativa de Colombia,
+    Pasto
+  </p>
+</footer>
