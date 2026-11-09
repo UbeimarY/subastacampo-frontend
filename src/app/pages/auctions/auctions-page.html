@@ -1,45 +1,130 @@
-<section class="page">
-  <div class="intro">
-    <div>
-      <h1>{{ heading() }}</h1>
-      @if (!myBids()) {
-        <p class="lede">
-          Productores de Nariño venden su cosecha al mejor postor. Las pujas llegan en vivo a todas
-          las pantallas.
+@if (!myBids()) {
+  <section class="hero">
+    <div class="hero__inner">
+      <div class="hero__text">
+        <h1>La cosecha de Nariño, al mejor postor</h1>
+        <p class="hero__lede">
+          Productores de las veredas publican su lote y compradores de toda la región pujan en vivo.
+          Cada puja llega al instante a todas las pantallas.
         </p>
-      }
-    </div>
-    @if (session.isProducer()) {
-      <a class="button" routerLink="/publicar">Publicar cosecha</a>
-    }
-  </div>
+        <div class="hero__actions">
+          @if (session.isProducer()) {
+            <a class="button button--maize" routerLink="/publicar">Publicar mi cosecha</a>
+          } @else if (!session.isSignedIn()) {
+            <a class="button button--maize" routerLink="/registro">Crear cuenta gratis</a>
+            <a class="button button--ghost" routerLink="/ingresar">Ya tengo cuenta</a>
+          }
+        </div>
 
-  @if (!myBids()) {
-    <div class="tabs" role="tablist" aria-label="Filtrar subastas">
-      <button
-        type="button"
-        role="tab"
-        [attr.aria-selected]="tab() === 'live'"
-        (click)="select('live')"
-      >
-        <span class="live-dot" aria-hidden="true"></span> En vivo
-      </button>
-      <button
-        type="button"
-        role="tab"
-        [attr.aria-selected]="tab() === 'closed'"
-        (click)="select('closed')"
-      >
-        Cerradas
-      </button>
-      @if (session.isProducer()) {
+        @if (tab() === 'live' && stats(); as stats) {
+          <dl class="pulse-strip" aria-label="Actividad en este momento">
+            <div>
+              <dt>Lotes en vivo</dt>
+              <dd>{{ stats.lots }}</dd>
+            </div>
+            <div>
+              <dt>Pujas</dt>
+              <dd>{{ formatNumber(stats.bids) }}</dd>
+            </div>
+            <div>
+              <dt>En juego</dt>
+              <dd>{{ formatCop(stats.atStake) }}</dd>
+            </div>
+            <div>
+              <dt>Cierran pronto</dt>
+              <dd [class.hot]="stats.closingSoon > 0">{{ stats.closingSoon }}</dd>
+            </div>
+          </dl>
+        }
+      </div>
+      <app-hillside class="hero__art" [live]="stats().lots > 0" />
+    </div>
+  </section>
+}
+
+<section class="page">
+  @if (myBids()) {
+    <div class="intro">
+      <div>
+        <h1>{{ heading() }}</h1>
+        <p class="lede">
+          Las subastas donde pujaste. Si ganas, aquí mismo ves cómo contactar al productor.
+        </p>
+      </div>
+    </div>
+  }
+
+  <div class="toolbar">
+    @if (!myBids()) {
+      <div class="tabs" role="tablist" aria-label="Estado de las subastas">
         <button
           type="button"
           role="tab"
-          [attr.aria-selected]="tab() === 'mine'"
-          (click)="select('mine')"
+          [attr.aria-selected]="tab() === 'live'"
+          (click)="select('live')"
         >
-          De mis productos
+          <span class="live-dot" aria-hidden="true"></span> En vivo
+        </button>
+        <button
+          type="button"
+          role="tab"
+          [attr.aria-selected]="tab() === 'closed'"
+          (click)="select('closed')"
+        >
+          Cerradas
+        </button>
+        @if (session.isProducer()) {
+          <button
+            type="button"
+            role="tab"
+            [attr.aria-selected]="tab() === 'mine'"
+            (click)="select('mine')"
+          >
+            De mis productos
+          </button>
+        }
+      </div>
+    }
+
+    <div class="finder">
+      <label class="search">
+        <span class="visually-hidden">Buscar producto</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2" />
+          <path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+        <input
+          type="search"
+          placeholder="Buscar: papa, mora, leche…"
+          [value]="query()"
+          (input)="onQuery($event)"
+        />
+      </label>
+      <label class="sort">
+        <span>Ordenar</span>
+        <select [value]="sort()" (change)="onSort($event)">
+          <option value="ending">Cierran primero</option>
+          <option value="price">Precio más alto</option>
+          <option value="bids">Más pujas</option>
+          <option value="newest">Más recientes</option>
+        </select>
+      </label>
+    </div>
+  </div>
+
+  @if (categories().length > 1) {
+    <div class="categories" role="group" aria-label="Filtrar por categoría">
+      <button type="button" [attr.aria-pressed]="category() === null" (click)="category.set(null)">
+        Todas <span>{{ items().length }}</span>
+      </button>
+      @for (option of categories(); track option.value) {
+        <button
+          type="button"
+          [attr.aria-pressed]="category() === option.value"
+          (click)="category.set(option.value)"
+        >
+          <app-field-art class="categories__swatch" [category]="option.value" />
+          {{ option.label }} <span>{{ option.count }}</span>
         </button>
       }
     </div>
@@ -53,7 +138,11 @@
   }
 
   @if (loading() && items().length === 0) {
-    <p class="empty" role="status">Cargando subastas…</p>
+    <div class="grid" role="status" aria-label="Cargando subastas">
+      @for (placeholder of [1, 2, 3]; track placeholder) {
+        <div class="skeleton card-skeleton"></div>
+      }
+    </div>
   } @else if (items().length === 0 && !error()) {
     <div class="empty panel">
       @if (myBids()) {
@@ -62,46 +151,103 @@
       } @else if (tab() === 'live') {
         <p>No hay subastas en vivo en este momento.</p>
         @if (session.isProducer()) {
-          <a class="button" routerLink="/publicar">Subasta tu cosecha</a>
+          <a class="button" routerLink="/publicar">Abrir la primera</a>
+        } @else {
+          <button type="button" class="button button--quiet" (click)="select('closed')">
+            Ver las cerradas
+          </button>
         }
       } @else {
         <p>No hay subastas para mostrar.</p>
       }
     </div>
+  } @else if (visible().length === 0) {
+    <div class="empty panel">
+      <p>Ningún lote coincide con tu búsqueda.</p>
+      <button
+        type="button"
+        class="button button--quiet"
+        (click)="query.set(''); category.set(null)"
+      >
+        Quitar filtros
+      </button>
+    </div>
   } @else {
-    <ol class="board" aria-live="polite">
-      @for (auction of items(); track auction.id) {
+    <ul class="grid">
+      @for (auction of visible(); track auction.id) {
         <li>
-          <a class="row" [routerLink]="['/subastas', auction.id]">
-            <span class="row__product">
-              <strong>{{ auction.product?.name }}</strong>
-              <span class="row__meta">
+          <a
+            class="card"
+            [class.card--closed]="auction.status !== AuctionStatus.ACTIVE"
+            [routerLink]="['/subastas', auction.id]"
+          >
+            <app-field-art class="card__art" [category]="auction.product?.category ?? 0" />
+            <div class="card__body">
+              <div class="card__tags">
+                @if (myBids()) {
+                  @switch (outcome(auction)) {
+                    @case ('won') {
+                      <span class="chip chip--won">Ganaste</span>
+                    }
+                    @case ('lost') {
+                      <span class="chip chip--muted">No ganaste</span>
+                    }
+                    @default {
+                      <span class="chip chip--live"><span class="live-dot"></span> En curso</span>
+                    }
+                  }
+                } @else if (auction.status === AuctionStatus.ACTIVE) {
+                  <span class="chip chip--live"><span class="live-dot"></span> En vivo</span>
+                } @else {
+                  <span class="chip chip--muted">{{ STATUS_LABELS[auction.status] }}</span>
+                }
+                @if (closingSoon(auction)) {
+                  <span class="chip chip--won">Cierra pronto</span>
+                }
+                @if (auction.extensionCount > 0) {
+                  <span class="chip">Extendida {{ auction.extensionCount }}×</span>
+                }
+              </div>
+
+              <h2 class="card__name">{{ auction.product?.name }}</h2>
+              <p class="card__meta">
                 {{ formatQuantity(auction.product?.quantity ?? 0, auction.product?.unit ?? 0) }}
                 · {{ CATEGORY_LABELS[auction.product?.category ?? 0] }}
-              </span>
-            </span>
-            <span class="row__price">
-              <span class="row__label">{{
-                auction.bidCount === 0 ? 'Precio inicial' : 'Puja más alta'
-              }}</span>
-              <span class="money">{{ formatCop(auction.currentPrice) }}</span>
-            </span>
-            <span class="row__bids">
-              <span class="row__label">Pujas</span>
-              <span class="money">{{ auction.bidCount }}</span>
-            </span>
-            <span class="row__time">
+              </p>
               @if (auction.status === AuctionStatus.ACTIVE) {
-                <span class="row__label">Cierra en</span>
-                <app-countdown [endsAt]="auction.endsAt" />
-              } @else {
-                <span class="status">{{ STATUS_LABELS[auction.status] }}</span>
+                <app-freshness
+                  [remaining]="auction.product?.remainingShelfLifeDays ?? 0"
+                  [total]="auction.product?.shelfLifeDays ?? 0"
+                />
               }
-            </span>
+
+              <div class="card__price">
+                <span class="card__label">
+                  @if (auction.status === AuctionStatus.ACTIVE) {
+                    {{ auction.bidCount === 0 ? 'Precio inicial' : 'Puja más alta' }}
+                  } @else {
+                    {{ auction.winnerId ? 'Vendido en' : 'Cerró sin pujas' }}
+                  }
+                </span>
+                <span class="money">{{ formatCop(auction.currentPrice) }}</span>
+              </div>
+
+              <div class="card__foot">
+                <span>{{ auction.bidCount }} {{ auction.bidCount === 1 ? 'puja' : 'pujas' }}</span>
+                @if (auction.status === AuctionStatus.ACTIVE) {
+                  <span class="card__clock">
+                    Cierra en <app-countdown [endsAt]="auction.endsAt" />
+                  </span>
+                }
+              </div>
+              @if (auction.status === AuctionStatus.ACTIVE) {
+                <app-time-bar [startsAt]="auction.startsAt" [endsAt]="auction.endsAt" />
+              }
+            </div>
           </a>
         </li>
       }
-    </ol>
+    </ul>
 
     @if (nextPageToken()) {
       <div class="more">

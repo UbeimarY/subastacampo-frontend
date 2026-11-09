@@ -1,148 +1,358 @@
-.intro {
+/* ---------- Hero: the hillside and what is happening right now ---------- */
+.hero {
+  background: var(--paramo-deep);
+  color: #f3f6f2;
+  overflow: hidden;
+}
+
+.hero__inner {
+  max-width: var(--content);
+  margin: 0 auto;
+  padding: clamp(28px, 5vw, 56px) var(--gutter) 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 24px;
+  align-items: end;
+}
+
+.hero__text {
+  padding-bottom: clamp(28px, 4vw, 44px);
+
+  h1 {
+    font-size: clamp(2rem, 4.6vw, 3.25rem);
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    max-width: 14ch;
+    margin-bottom: 16px;
+  }
+}
+
+.hero__lede {
+  max-width: 48ch;
+  color: #cfdcd3;
+}
+
+.hero__actions {
   display: flex;
   flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0 28px;
+}
+
+.hero__art {
+  align-self: stretch;
+  min-height: 260px;
+  margin-right: calc(var(--gutter) * -1);
+}
+
+.pulse-strip {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  justify-content: start;
+  gap: 4px 28px;
+  margin: 0;
+  padding-top: 18px;
+  border-top: 1px solid rgb(255 255 255 / 0.16);
+
+  dt {
+    font-size: 0.82rem;
+    color: #a9bfb1;
+  }
+
+  dd {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.35rem;
+    font-variant-numeric: tabular-nums;
+    color: #fff;
+  }
+
+  .hot {
+    color: var(--maize);
+  }
+}
+
+/* ---------- Toolbar ---------- */
+.intro {
+  margin-bottom: 8px;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   justify-content: space-between;
-  align-items: flex-end;
-  gap: 16px;
-  margin-bottom: 20px;
+  gap: 14px;
+  margin-bottom: 14px;
 }
 
 .tabs {
-  display: flex;
-  gap: 6px;
-  margin-bottom: 16px;
-  overflow-x: auto;
+  display: inline-flex;
+  padding: 4px;
+  gap: 4px;
+  border-radius: 999px;
+  background: #e1e8e3;
 
   button {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font: inherit;
-    font-weight: 700;
-    min-height: 44px;
-    padding: 8px 16px;
+    min-height: 40px;
+    padding: 6px 16px;
+    border: 0;
     border-radius: 999px;
-    border: 1.5px solid var(--line);
-    background: var(--surface);
+    background: transparent;
+    font: inherit;
+    font-weight: 650;
     color: var(--ink-soft);
     cursor: pointer;
-    white-space: nowrap;
 
     &[aria-selected='true'] {
-      background: var(--ink);
-      border-color: var(--ink);
-      color: #fff;
+      background: var(--surface);
+      color: var(--ink);
+      box-shadow: var(--shadow-s);
     }
   }
 }
 
-.retry {
-  margin-left: 12px;
-  min-height: 36px;
+.finder {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  flex: 1;
+  justify-content: flex-end;
 }
 
-/* A market chalkboard: one row per lot, prices aligned in columns. */
-.board {
+.search {
+  position: relative;
+  flex: 1;
+  max-width: 340px;
+  min-width: 200px;
+
+  svg {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    width: 18px;
+    height: 18px;
+    transform: translateY(-50%);
+    color: var(--ink-soft);
+  }
+
+  input {
+    min-height: 44px;
+    padding-left: 38px;
+    border-radius: 999px;
+  }
+}
+
+.sort {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+
+  select {
+    min-height: 44px;
+    width: auto;
+    border-radius: 999px;
+    padding: 6px 14px;
+  }
+}
+
+.categories {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  margin-bottom: 22px;
+
+  button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex: none;
+    min-height: 38px;
+    padding: 4px 14px 4px 6px;
+    border: 1.5px solid var(--line);
+    border-radius: 999px;
+    background: var(--surface);
+    font: inherit;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--ink);
+    cursor: pointer;
+
+    &:first-child {
+      padding-left: 14px;
+    }
+
+    span {
+      color: var(--ink-soft);
+      font-weight: 500;
+    }
+
+    &[aria-pressed='true'] {
+      border-color: var(--ink);
+      background: var(--ink);
+      color: #fff;
+
+      span {
+        color: #c9d3cc;
+      }
+    }
+  }
+}
+
+.categories__swatch {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+}
+
+/* ---------- Cards ---------- */
+.grid {
   list-style: none;
   margin: 0;
   padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 18px;
+}
+
+.card-skeleton {
+  height: 330px;
+}
+
+.card {
+  display: grid;
+  grid-template-rows: 112px 1fr;
+  height: 100%;
+  border-radius: var(--radius-m);
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: var(--radius-m);
-  overflow: hidden;
-
-  li + li {
-    border-top: 1px solid var(--line);
-  }
-}
-
-.row {
-  display: grid;
-  grid-template-columns: minmax(0, 2.4fr) minmax(0, 1.4fr) minmax(0, 0.6fr) minmax(0, 1fr);
-  align-items: center;
-  gap: 16px;
-  padding: 16px 20px;
+  box-shadow: var(--shadow-s);
   color: inherit;
   text-decoration: none;
+  overflow: hidden;
+  transition:
+    transform 140ms ease,
+    box-shadow 140ms ease;
 
   &:hover {
-    background: var(--mist);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-m);
   }
 
-  &:focus-visible {
-    outline-offset: -3px;
+  &:hover .card__name {
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 }
 
-.row__product {
+.card--closed {
+  .card__art {
+    filter: saturate(0.45);
+  }
+}
+
+.card__art {
+  height: 112px;
+}
+
+.card__body {
   display: grid;
-  gap: 2px;
-
-  strong {
-    font-family: var(--font-display);
-    font-size: 1.15rem;
-  }
+  gap: 8px;
+  align-content: start;
+  padding: 16px 18px 18px;
 }
 
-.row__meta,
-.row__label {
+.card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  min-height: 24px;
+}
+
+.card__name {
+  margin: 2px 0 0;
+  font-size: 1.2rem;
+}
+
+.card__meta {
+  margin: 0;
+  font-size: 0.9rem;
   color: var(--ink-soft);
-  font-size: 0.875rem;
 }
 
-.row__price,
-.row__bids,
-.row__time {
+.card__price {
   display: grid;
-  gap: 2px;
-}
+  margin-top: 6px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--line);
 
-.row__price .money {
-  font-size: 1.25rem;
-}
-
-.row__time {
-  justify-items: end;
-  text-align: right;
-
-  app-countdown {
-    font-size: 1.15rem;
+  .money {
+    font-size: 1.65rem;
+    line-height: 1.1;
   }
 }
 
-.status {
-  font-weight: 700;
+.card__label {
+  font-size: 0.82rem;
   color: var(--ink-soft);
+}
+
+.card__foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+.card__clock {
+  color: var(--ink);
 }
 
 .more {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 24px;
 }
 
-@media (max-width: 720px) {
-  .row {
-    grid-template-columns: 1fr auto;
-    grid-template-areas:
-      'product product'
-      'price time';
-    gap: 10px;
+.retry {
+  margin-left: 8px;
+  min-height: 36px;
+}
+
+/* ---------- Small screens ---------- */
+@media (max-width: 760px) {
+  .hero__inner {
+    grid-template-columns: 1fr;
   }
 
-  .row__product {
-    grid-area: product;
+  .hero__art {
+    order: -1;
+    min-height: 150px;
+    max-height: 170px;
+    margin: 0 calc(var(--gutter) * -1);
   }
 
-  .row__price {
-    grid-area: price;
+  .hero__text {
+    padding-bottom: 24px;
   }
 
-  .row__time {
-    grid-area: time;
+  .pulse-strip {
+    grid-template-columns: repeat(2, auto);
   }
 
-  .row__bids {
-    display: none;
+  .finder {
+    justify-content: stretch;
+  }
+
+  .search {
+    max-width: none;
   }
 }
