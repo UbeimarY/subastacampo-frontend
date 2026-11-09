@@ -2,10 +2,44 @@
   display: block;
 }
 
+/* Split screen: the hillside on one side, the form on the other. */
+.auth-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  min-height: calc(100vh - 68px);
+}
+
+.auth-art {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--paramo-deep);
+  color: #f3f6f2;
+  overflow: hidden;
+}
+
+.auth-art__quote {
+  max-width: 22ch;
+  margin: clamp(32px, 7vh, 72px) clamp(24px, 5vw, 64px) 0;
+  font-family: var(--font-display);
+  font-weight: 650;
+  font-size: clamp(1.5rem, 2.6vw, 2.2rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.auth-art__hill {
+  height: 55%;
+  min-height: 220px;
+}
+
 .auth {
-  max-width: 460px;
+  width: 100%;
+  max-width: 480px;
   margin: 0 auto;
   padding: 40px var(--gutter) 64px;
+  align-self: center;
 }
 
 .auth h1 {
@@ -20,4 +54,24 @@
   margin-top: 20px;
   text-align: center;
   color: var(--ink-soft);
+}
+
+@media (max-width: 860px) {
+  .auth-split {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .auth-art {
+    min-height: 0;
+  }
+
+  .auth-art__quote {
+    display: none;
+  }
+
+  .auth-art__hill {
+    height: 120px;
+    min-height: 0;
+  }
 }

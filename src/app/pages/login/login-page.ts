@@ -5,10 +5,11 @@ import { Router, RouterLink } from '@angular/router';
 import { AUTH_CLIENT } from '../../core/api/clients';
 import { describeError } from '../../core/api/errors';
 import { SessionStore } from '../../core/auth/session.store';
+import { Hillside } from '../../shared/hillside';
 
 @Component({
   selector: 'app-login-page',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [Hillside, ReactiveFormsModule, RouterLink],
   templateUrl: './login-page.html',
   styleUrl: '../../shared/auth-layout.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

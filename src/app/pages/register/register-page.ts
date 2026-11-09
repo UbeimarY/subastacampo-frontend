@@ -6,10 +6,11 @@ import { AUTH_CLIENT } from '../../core/api/clients';
 import { describeError } from '../../core/api/errors';
 import { SessionStore } from '../../core/auth/session.store';
 import { UserRole } from '../../gen/subastacampo/v1/common_pb';
+import { Hillside } from '../../shared/hillside';
 
 @Component({
   selector: 'app-register-page',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [Hillside, ReactiveFormsModule, RouterLink],
   templateUrl: './register-page.html',
   styleUrls: ['../../shared/auth-layout.scss', './register-page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
