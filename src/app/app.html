@@ -46,7 +46,15 @@
 
     <div class="account">
       @if (session.user(); as user) {
-        <span class="account__name">{{ firstName(user.fullName) }}</span>
+        <span class="account__who">
+          <span class="account__avatar" aria-hidden="true">{{ user.fullName.charAt(0) }}</span>
+          <span class="account__text">
+            <span class="account__name">{{ firstName(user.fullName) }}</span>
+            <span class="account__role">{{
+              session.isProducer() ? 'Productor' : 'Comprador'
+            }}</span>
+          </span>
+        </span>
         <button type="button" class="account__out" (click)="signOut()">Salir</button>
       } @else {
         <a routerLink="/ingresar">Ingresar</a>

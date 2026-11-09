@@ -130,3 +130,31 @@ main {
     flex-wrap: nowrap;
   }
 }
+
+.account__who {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.account__avatar {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--maize);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+.account__text {
+  display: grid;
+  line-height: 1.15;
+}
+
+.account__role {
+  font-size: 0.75rem;
+  opacity: 0.75;
+}
