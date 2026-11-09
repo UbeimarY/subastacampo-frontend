@@ -2,48 +2,117 @@
   <div class="intro">
     <div>
       <h1>Mis productos</h1>
-      <p class="lede">Tus cosechas publicadas. Abre una subasta cuando quieras venderlas.</p>
+      <p class="lede">Tus lotes, cómo van sus subastas y a quién llamar cuando se venden.</p>
     </div>
     <a class="button" routerLink="/publicar">Publicar cosecha</a>
   </div>
+
+  @if (summary(); as summary) {
+    <dl class="summary">
+      <div>
+        <dt>Lotes publicados</dt>
+        <dd>{{ summary.lots }}</dd>
+      </div>
+      <div>
+        <dt>En subasta ahora</dt>
+        <dd>{{ summary.live }}</dd>
+      </div>
+      <div>
+        <dt>Vendidos</dt>
+        <dd>{{ summary.sold }}</dd>
+      </div>
+      <div class="summary__earned">
+        <dt>Total vendido</dt>
+        <dd>{{ formatCop(summary.earned) }}</dd>
+      </div>
+    </dl>
+  }
 
   @if (error()) {
     <p class="alert" role="alert">{{ error() }}</p>
   }
 
   @if (loading() && products().length === 0) {
-    <p class="empty" role="status">Cargando tus productos…</p>
+    <div
+      class="skeleton"
+      style="height: 240px"
+      role="status"
+      aria-label="Cargando tus productos"
+    ></div>
   } @else if (products().length === 0 && !error()) {
     <div class="panel empty">
       <p>Todavía no has publicado ninguna cosecha.</p>
       <a class="button" routerLink="/publicar">Publicar mi primera cosecha</a>
     </div>
   } @else {
-    <ul class="products">
-      @for (product of products(); track product.id) {
-        <li class="product">
-          <div>
-            <strong>{{ product.name }}</strong>
+    <ul class="rows">
+      @for (row of rows(); track row.product.id) {
+        <li class="row">
+          <app-field-art class="row__art" [category]="row.product.category" />
+          <div class="row__lot">
+            <strong>{{ row.product.name }}</strong>
             <span class="meta"
-              >{{ formatQuantity(product.quantity, product.unit) }} ·
-              {{ CATEGORY_LABELS[product.category] }}</span
+              >{{ formatQuantity(row.product.quantity, row.product.unit) }} ·
+              {{ CATEGORY_LABELS[row.product.category] }}</span
             >
+            <app-freshness
+              [remaining]="row.product.remainingShelfLifeDays"
+              [total]="row.product.shelfLifeDays"
+            />
           </div>
-          <span class="shelf" [class.shelf--short]="product.remainingShelfLifeDays <= 3">
-            @if (product.remainingShelfLifeDays === 0) {
-              Vida útil terminada
+
+          <div class="row__status">
+            @if (row.auction; as auction) {
+              @switch (auction.status) {
+                @case (AuctionStatus.ACTIVE) {
+                  <span class="chip chip--live"><span class="live-dot"></span> En vivo</span>
+                  <span class="money">{{ formatCop(auction.currentPrice) }}</span>
+                  <span class="meta"
+                    >{{ auction.bidCount }} pujas · cierra en
+                    <app-countdown [endsAt]="auction.endsAt"
+                  /></span>
+                }
+                @case (AuctionStatus.CLOSED) {
+                  @if (auction.winnerId) {
+                    <span class="chip chip--won">Vendido</span>
+                    <span class="money">{{ formatCop(auction.currentPrice) }}</span>
+                    <span class="meta">{{ auction.bidCount }} pujas</span>
+                  } @else {
+                    <span class="chip chip--muted">Cerró sin pujas</span>
+                  }
+                }
+              }
             } @else {
-              {{ product.remainingShelfLifeDays }}
-              {{ product.remainingShelfLifeDays === 1 ? 'día' : 'días' }} de vida útil
+              <span class="chip chip--muted">Sin subasta</span>
             }
-          </span>
-          @if (product.remainingShelfLifeDays > 0) {
-            <a
-              class="button button--quiet"
-              routerLink="/publicar"
-              [queryParams]="{ producto: product.id }"
-              >Precio y subasta</a
-            >
+          </div>
+
+          <div class="row__actions">
+            @if (row.auction; as auction) {
+              @if (auction.status === AuctionStatus.CLOSED && auction.winnerId) {
+                <button
+                  type="button"
+                  class="button"
+                  [attr.aria-expanded]="openContact() === auction.id"
+                  (click)="toggleContact(auction.id)"
+                >
+                  {{ openContact() === auction.id ? 'Ocultar contacto' : 'Contactar comprador' }}
+                </button>
+              }
+              <a class="button button--quiet" [routerLink]="['/subastas', auction.id]">Ver sala</a>
+            }
+            @if (canAuction(row)) {
+              <a
+                class="button button--quiet"
+                routerLink="/publicar"
+                [queryParams]="{ producto: row.product.id }"
+                >{{ row.auction ? 'Subastar de nuevo' : 'Abrir subasta' }}</a
+              >
+            }
+          </div>
+
+          @if (row.auction && openContact() === row.auction.id) {
+            <app-contact-card class="row__contact" [auction]="row.auction" [compact]="true" />
           }
         </li>
       }
