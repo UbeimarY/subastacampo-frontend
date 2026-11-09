@@ -30,8 +30,7 @@
               }
             ],
             "styles": [
-              "@fontsource/atkinson-hyperlegible/latin-400.css",
-              "@fontsource/atkinson-hyperlegible/latin-700.css",
+              "@fontsource-variable/figtree/wght.css",
               "@fontsource-variable/bricolage-grotesque/opsz.css",
               "src/styles.scss"
             ]
