@@ -8,14 +8,19 @@
     </div>
   } @else if (auction(); as auction) {
     <header class="lot">
-      <div>
+      <app-field-art class="lot__art" [category]="auction.product?.category ?? 0" />
+      <div class="lot__text">
         <h1>{{ auction.product?.name }}</h1>
         <p class="lot__meta">
           {{ formatQuantity(auction.product?.quantity ?? 0, auction.product?.unit ?? 0) }}
           · {{ CATEGORY_LABELS[auction.product?.category ?? 0] }} · Cosechado el
-          {{ formatDay(auction.product?.harvestDate) }} ·
-          {{ auction.product?.remainingShelfLifeDays }} días de vida útil
+          {{ formatDay(auction.product?.harvestDate) }} · {{ auction.product?.shelfLifeDays }} días
+          de vida útil
         </p>
+        <app-freshness
+          [remaining]="auction.product?.remainingShelfLifeDays ?? 0"
+          [total]="auction.product?.shelfLifeDays ?? 0"
+        />
         @if (auction.product?.description) {
           <p class="lot__description">{{ auction.product?.description }}</p>
         }
@@ -33,9 +38,23 @@
         <div class="board__stripe" aria-hidden="true"></div>
         <div class="board__body">
           <p class="board__label">
-            {{ auction.bidCount === 0 ? 'Precio inicial' : 'Puja más alta' }}
+            @if (isActive()) {
+              {{ auction.bidCount === 0 ? 'Precio inicial' : 'Puja más alta' }}
+            } @else {
+              {{ auction.winnerId ? 'Precio final' : 'Cerró sin pujas' }}
+            }
           </p>
           <p class="board__price money" aria-live="polite">{{ formatCop(auction.currentPrice) }}</p>
+          @if (pricePerKg(); as perKg) {
+            <p class="board__per-kg">{{ formatCop(perKg) }} por kilo</p>
+          }
+          @if (bids().length > 0) {
+            <app-price-chart
+              class="board__chart"
+              [bids]="bids()"
+              [startingPrice]="startingPrice()"
+            />
+          }
 
           <dl class="board__facts">
             <div>
@@ -52,12 +71,21 @@
               <dt>Pujas</dt>
               <dd class="money">{{ auction.bidCount }}</dd>
             </div>
-            <div>
-              <dt>Puja mínima</dt>
-              <dd class="money">{{ formatCop(auction.nextMinBid) }}</dd>
-            </div>
+            @if (isActive()) {
+              <div>
+                <dt>Puja mínima</dt>
+                <dd class="money">{{ formatCop(auction.nextMinBid) }}</dd>
+              </div>
+            }
           </dl>
 
+          @if (isActive()) {
+            <app-time-bar
+              class="board__time"
+              [startsAt]="auction.startsAt"
+              [endsAt]="auction.endsAt"
+            />
+          }
           @if (auction.extensionCount > 0) {
             <p class="board__note">
               El cierre se extendió {{ auction.extensionCount }}
@@ -69,21 +97,33 @@
       </div>
 
       <aside class="side">
+        @if (standing(); as standing) {
+          <p class="standing" [class.standing--outbid]="standing === 'outbid'" role="status">
+            @if (standing === 'leading') {
+              <strong>Vas ganando.</strong> Tu puja es la más alta por ahora.
+            } @else {
+              <strong>Te superaron.</strong> Puja de nuevo para recuperar el primer lugar.
+            }
+          </p>
+        }
         @if (result(); as result) {
           <div class="result" [class.result--won]="result.kind === 'won'" role="status">
             @switch (result.kind) {
               @case ('won') {
                 <h2>Ganaste esta subasta</h2>
                 <p>
-                  Tu puja de {{ formatCop(auction.currentPrice) }} fue la más alta. El productor se
-                  pondrá en contacto contigo.
+                  Tu puja de {{ formatCop(auction.currentPrice) }} fue la más alta. Escríbele al
+                  productor para acordar el pago y la entrega.
                 </p>
               }
               @case ('other') {
-                <h2>Subasta cerrada</h2>
+                <h2>{{ isOwner() ? 'Vendiste tu lote' : 'Subasta cerrada' }}</h2>
                 <p>
                   Ganó el postor #{{ result.bidderNumber }} con
                   {{ formatCop(auction.currentPrice) }}.
+                  @if (isOwner()) {
+                    Contáctalo para acordar el pago y la entrega.
+                  }
                 </p>
               }
               @case ('empty') {
@@ -92,6 +132,9 @@
               }
             }
           </div>
+          @if (showContact()) {
+            <app-contact-card [auction]="auction" />
+          }
         } @else if (canBid()) {
           <form class="panel bid" (submit)="$event.preventDefault(); placeBid()">
             <h2>Tu puja</h2>

@@ -18,12 +18,18 @@ import { openAuctionRoom, type AuctionRoom } from '../../core/live/auction-room'
 import type { ConnectionState } from '../../core/live/room-state';
 import {
   CATEGORY_LABELS,
+  KG_PER_UNIT,
   RISK_LEVEL_LABELS,
   RISK_SIGNAL_LABELS,
   formatQuantity,
 } from '../../core/labels';
 import { AuctionStatus, RiskLevel, type Bid } from '../../gen/subastacampo/v1/auction_pb';
+import { ContactCard } from '../../shared/contact-card';
 import { Countdown } from '../../shared/countdown';
+import { FieldArt } from '../../shared/field-art';
+import { Freshness } from '../../shared/freshness';
+import { PriceChart } from '../../shared/price-chart';
+import { TimeBar } from '../../shared/time-bar';
 
 const MAX_RETRIES = 2;
 
@@ -37,7 +43,7 @@ const CONNECTION_LABELS: Record<ConnectionState, string> = {
 
 @Component({
   selector: 'app-auction-room-page',
-  imports: [RouterLink, Countdown],
+  imports: [RouterLink, Countdown, ContactCard, FieldArt, Freshness, PriceChart, TimeBar],
   templateUrl: './auction-room-page.html',
   styleUrl: './auction-room-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -81,6 +87,36 @@ export class AuctionRoomPage {
     const winner = this.bids().find((bid) => bid.bidderId === auction.winnerId);
     return { kind: 'other' as const, bidderNumber: winner?.bidderNumber };
   });
+
+  /** For a buyer who already bid: are they on top right now? */
+  protected readonly standing = computed(() => {
+    if (!this.isActive() || !this.session.isBuyer()) return null;
+    const bids = this.bids();
+    if (!bids.some((bid) => this.isMine(bid))) return null;
+    return this.isMine(bids[0]) ? ('leading' as const) : ('outbid' as const);
+  });
+
+  /** Only the producer and the winner can see each other's contact (the server checks it too). */
+  protected readonly showContact = computed(() => {
+    const auction = this.auction();
+    const me = this.session.user()?.id;
+    return (
+      auction?.status === AuctionStatus.CLOSED &&
+      !!auction.winnerId &&
+      !!me &&
+      (me === auction.winnerId || this.isOwner())
+    );
+  });
+
+  protected readonly pricePerKg = computed(() => {
+    const auction = this.auction();
+    const product = auction?.product;
+    if (!auction?.currentPrice || !product) return null;
+    const kilos = product.quantity * KG_PER_UNIT[product.unit];
+    return kilos > 0 ? BigInt(Math.round(Number(auction.currentPrice.units) / kilos)) : null;
+  });
+
+  protected readonly startingPrice = computed(() => this.auction()?.startingPrice?.units ?? 0n);
 
   protected readonly amount = signal('');
   protected readonly amountLabel = computed(() => {

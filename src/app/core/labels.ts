@@ -37,6 +37,15 @@ export const UNIT_OPTIONS = [
   { value: QuantityUnit.KILOGRAM, label: 'Kilos' },
 ];
 
+/** Kilograms in one unit, as the pricing model counts them. */
+export const KG_PER_UNIT: Record<QuantityUnit, number> = {
+  [QuantityUnit.UNSPECIFIED]: 1,
+  [QuantityUnit.KILOGRAM]: 1,
+  [QuantityUnit.ARROBA]: 12.5,
+  [QuantityUnit.SACK]: 50,
+  [QuantityUnit.CRATE]: 20,
+};
+
 export function formatQuantity(quantity: number, unit: QuantityUnit): string {
   const [singular, plural] = UNIT_NAMES[unit];
   return `${formatNumber(quantity)} ${quantity === 1 ? singular : plural}`;

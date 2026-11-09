@@ -4,12 +4,39 @@
 }
 
 .lot {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 12px 24px;
-  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 12px 20px;
+  margin-bottom: 24px;
+}
+
+.lot__art {
+  width: 84px;
+  height: 84px;
+  border-radius: 18px;
+  box-shadow: var(--shadow-m);
+}
+
+.lot__text h1 {
+  margin-bottom: 6px;
+}
+
+@media (max-width: 640px) {
+  .lot {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .lot__art {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+  }
+
+  .connection {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
 }
 
 .lot__meta {
@@ -322,4 +349,40 @@
     grid-column: 1 / -1;
     justify-content: flex-start;
   }
+}
+
+/* ---------- Additions: price per kilo, price chart, time left, buyer standing ---------- */
+.board__per-kg {
+  margin: -6px 0 10px;
+  color: #b8c7bd;
+  font-size: 0.95rem;
+}
+
+.board__chart {
+  margin: 4px 0 18px;
+}
+
+.board__time {
+  margin-top: 16px;
+  background: rgb(255 255 255 / 0.12);
+}
+
+.standing {
+  margin: 0 0 14px;
+  padding: 14px 16px;
+  border-radius: var(--radius-m);
+  background: var(--paramo-wash);
+  border: 1.5px solid var(--paramo);
+  color: var(--paramo-deep);
+}
+
+.standing--outbid {
+  background: var(--barniz-wash);
+  border-color: var(--barniz);
+  color: var(--danger);
+}
+
+.side app-contact-card {
+  display: block;
+  margin-top: 14px;
 }
