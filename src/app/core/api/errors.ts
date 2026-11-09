@@ -28,6 +28,10 @@ const REASON_MESSAGES: Record<ErrorReason, string> = {
   [ErrorReason.AUCTION_NOT_ACTIVE]: 'La subasta ya terminó: no recibe más pujas.',
   [ErrorReason.BID_TOO_LOW]: 'Alguien pujó antes que tú. Tu puja debe superar el nuevo mínimo.',
   [ErrorReason.AUTHENTICATION_REQUIRED]: 'Inicia sesión para continuar.',
+  [ErrorReason.AUCTION_HAS_NO_WINNER]:
+    'Los datos de contacto se comparten cuando la subasta cierra con un ganador.',
+  [ErrorReason.NOT_AUCTION_PARTY]:
+    'Solo el productor y quien ganó pueden ver los datos de contacto.',
 };
 
 const FIELD_MESSAGES: Record<string, string> = {
