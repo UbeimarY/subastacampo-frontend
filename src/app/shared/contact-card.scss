@@ -1,0 +1,85 @@
+.contact {
+  display: grid;
+  gap: 16px;
+  padding: 20px;
+  border-radius: var(--radius-m);
+  background: var(--surface);
+  border: 1.5px solid var(--maize);
+  box-shadow: var(--shadow-m);
+}
+
+.contact--compact {
+  padding: 14px;
+  gap: 12px;
+  box-shadow: none;
+}
+
+.contact__who {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  p {
+    margin: 0;
+  }
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--paramo);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+.contact__role {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+}
+
+.contact__name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+
+.contact__meta {
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+.contact__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  .button {
+    min-height: 42px;
+    padding: 8px 16px;
+  }
+}
+
+.contact__whatsapp {
+  background: #1f7a4c;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  &:hover {
+    background: #17603b;
+  }
+}
+
+.contact__note {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}

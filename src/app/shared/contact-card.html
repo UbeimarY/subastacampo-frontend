@@ -1,0 +1,49 @@
+@if (contact(); as contact) {
+  <section class="contact" [class.contact--compact]="compact()" aria-label="Datos de contacto">
+    <div class="contact__who">
+      <span class="avatar" aria-hidden="true">{{ contact.fullName.charAt(0) }}</span>
+      <div>
+        <p class="contact__role">{{ title() }}</p>
+        <p class="contact__name">{{ contact.fullName }}</p>
+        <p class="contact__meta">
+          @if (contact.municipality) {
+            {{ contact.municipality }} ·
+          }
+          {{ contact.phone ?? 'Sin teléfono registrado' }}
+        </p>
+      </div>
+    </div>
+    <div class="contact__actions">
+      @if (whatsapp(); as link) {
+        <a class="button contact__whatsapp" [href]="link" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M4.5 19.5l1.1-3.9A8 8 0 1 1 8.6 18.5l-4.1 1Z M9 8.5c.3 2.7 2.8 5.6 6.5 6.5l1-1.3-2-1-.8.9c-1.3-.5-2.6-1.8-3.1-3.1l.9-.8-1-2-1.5.8Z"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linejoin="round"
+            />
+          </svg>
+          Escribir por WhatsApp
+        </a>
+      }
+      @if (call(); as link) {
+        <a class="button button--quiet" [href]="link">Llamar</a>
+      }
+      @if (mail(); as link) {
+        <a class="button button--quiet" [href]="link">Enviar correo</a>
+      }
+    </div>
+    @if (!compact()) {
+      <p class="contact__note">
+        Solo tú y {{ otherIsBuyer() ? 'quien ganó' : 'el productor' }} ven estos datos. El mensaje
+        ya va escrito con el lote y el precio final ({{ formatCop(response()?.finalPrice) }}).
+      </p>
+    }
+  </section>
+} @else if (error(); as message) {
+  <p class="alert" role="alert">{{ message }}</p>
+} @else {
+  <div class="skeleton" style="height: 120px" role="status" aria-label="Cargando contacto"></div>
+}
