@@ -63,6 +63,7 @@
       }
     </div>
   </div>
+  <app-barniz-band [height]="10" />
 </header>
 
 <main id="main" tabindex="-1">
@@ -70,12 +71,68 @@
 </main>
 
 <footer class="footer">
-  <p>
-    El precio sugerido lo calcula un modelo de inteligencia artificial: es una referencia, tú
-    decides el precio.
-  </p>
-  <p>
-    Proyecto académico · Programación Orientada a la Web · Universidad Cooperativa de Colombia,
-    Pasto
-  </p>
+  <app-barniz-band [height]="18" />
+  <div class="footer__inner">
+    <svg class="footer__galeras" viewBox="0 0 320 60" aria-hidden="true">
+      <path
+        d="M0 58 L70 40 L110 30 L140 12 Q152 4 166 10 L196 26 L240 38 L320 52"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linejoin="round"
+      />
+      <path d="M146 10 Q152 2 160 8" fill="none" stroke="var(--barniz)" stroke-width="2" />
+    </svg>
+    <p class="footer__places">
+      Cosechas de Pasto, Ipiales, Túquerres, La Cruz, Sandoná, La Unión y todas las veredas de
+      Nariño.
+    </p>
+    <nav class="footer__links" aria-label="Pie de página">
+      <a routerLink="/">Subastas en vivo</a>
+      <a routerLink="/precios">Precios del mercado</a>
+      @if (!session.isSignedIn()) {
+        <a routerLink="/registro">Crear cuenta</a>
+      }
+    </nav>
+    <p>
+      El precio sugerido lo calcula un modelo de inteligencia artificial: es una referencia, tú
+      decides el precio.
+    </p>
+    <p>
+      Proyecto académico · Programación Orientada a la Web · Universidad Cooperativa de Colombia,
+      Pasto
+    </p>
+  </div>
 </footer>
+
+<nav class="tabbar" aria-label="Principal en el teléfono">
+  <a
+    routerLink="/"
+    routerLinkActive="is-active"
+    [routerLinkActiveOptions]="{ exact: true }"
+    ariaCurrentWhenActive="page"
+  >
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19h16M6 19l4-8 3 5 2-3 4 6" /></svg>
+    Subastas
+  </a>
+  <a routerLink="/precios" routerLinkActive="is-active" ariaCurrentWhenActive="page">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18l5-6 4 3 7-9M15 6h5v5" /></svg>
+    Precios
+  </a>
+  @if (session.isProducer()) {
+    <a routerLink="/publicar" routerLinkActive="is-active" ariaCurrentWhenActive="page">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
+      Publicar
+    </a>
+    <a routerLink="/mis-productos" routerLinkActive="is-active" ariaCurrentWhenActive="page">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16v12H4zM8 7V4h8v3" /></svg>
+      Mis productos
+    </a>
+  }
+  @if (session.isBuyer()) {
+    <a routerLink="/mis-pujas" routerLinkActive="is-active" ariaCurrentWhenActive="page">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19l7-7M10 6l8 8M13 3l8 8" /></svg>
+      Mis pujas
+    </a>
+  }
+</nav>
