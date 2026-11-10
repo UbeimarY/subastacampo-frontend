@@ -14,7 +14,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file subastacampo/v1/catalog.proto.
  */
 export const file_subastacampo_v1_catalog: GenFile = /*@__PURE__*/
-  fileDesc("Ch1zdWJhc3RhY2FtcG8vdjEvY2F0YWxvZy5wcm90bxIPc3ViYXN0YWNhbXBvLnYxIsICCgdQcm9kdWN0EgoKAmlkGAEgASgJEhMKC3Byb2R1Y2VyX2lkGAIgASgJEgwKBG5hbWUYAyABKAkSEwoLZGVzY3JpcHRpb24YBCABKAkSMgoIY2F0ZWdvcnkYBSABKA4yIC5zdWJhc3RhY2FtcG8udjEuUHJvZHVjdENhdGVnb3J5EhAKCHF1YW50aXR5GAYgASgBEisKBHVuaXQYByABKA4yHS5zdWJhc3RhY2FtcG8udjEuUXVhbnRpdHlVbml0EhQKDGhhcnZlc3RfZGF0ZRgIIAEoCRIXCg9zaGVsZl9saWZlX2RheXMYCSABKAUSIQoZcmVtYWluaW5nX3NoZWxmX2xpZmVfZGF5cxgKIAEoBRIuCgpjcmVhdGVkX2F0GAsgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCJMCgtQcmljZUZhY3RvchIuCgRjb2RlGAEgASgOMiAuc3ViYXN0YWNhbXBvLnYxLlByaWNlRmFjdG9yQ29kZRINCgV2YWx1ZRgCIAEoASK6AgoPUHJpY2VTdWdnZXN0aW9uEi8KD3N1Z2dlc3RlZF9wcmljZRgBIAEoCzIWLnN1YmFzdGFjYW1wby52MS5Nb25leRIpCglyYW5nZV9taW4YAiABKAsyFi5zdWJhc3RhY2FtcG8udjEuTW9uZXkSKQoJcmFuZ2VfbWF4GAMgASgLMhYuc3ViYXN0YWNhbXBvLnYxLk1vbmV5EiwKDHByaWNlX3Blcl9rZxgEIAEoCzIWLnN1YmFzdGFjYW1wby52MS5Nb25leRITCgtxdWFudGl0eV9rZxgFIAEoARIXCg9jYXRlZ29yeV9kZW1hbmQYBiABKAESLQoHZmFjdG9ycxgHIAMoCzIcLnN1YmFzdGFjYW1wby52MS5QcmljZUZhY3RvchIVCg1tb2RlbF92ZXJzaW9uGAggASgJItsBChRDcmVhdGVQcm9kdWN0UmVxdWVzdBIMCgRuYW1lGAEgASgJEhMKC2Rlc2NyaXB0aW9uGAIgASgJEjIKCGNhdGVnb3J5GAMgASgOMiAuc3ViYXN0YWNhbXBvLnYxLlByb2R1Y3RDYXRlZ29yeRIQCghxdWFudGl0eRgEIAEoARIrCgR1bml0GAUgASgOMh0uc3ViYXN0YWNhbXBvLnYxLlF1YW50aXR5VW5pdBIUCgxoYXJ2ZXN0X2RhdGUYBiABKAkSFwoPc2hlbGZfbGlmZV9kYXlzGAcgASgFIkIKFUNyZWF0ZVByb2R1Y3RSZXNwb25zZRIpCgdwcm9kdWN0GAEgASgLMhguc3ViYXN0YWNhbXBvLnYxLlByb2R1Y3QiJwoRR2V0UHJvZHVjdFJlcXVlc3QSEgoKcHJvZHVjdF9pZBgBIAEoCSI/ChJHZXRQcm9kdWN0UmVzcG9uc2USKQoHcHJvZHVjdBgBIAEoCzIYLnN1YmFzdGFjYW1wby52MS5Qcm9kdWN0IoMBChNMaXN0UHJvZHVjdHNSZXF1ZXN0EjIKCGNhdGVnb3J5GAEgASgOMiAuc3ViYXN0YWNhbXBvLnYxLlByb2R1Y3RDYXRlZ29yeRIRCglvbmx5X21pbmUYAiABKAgSEQoJcGFnZV9zaXplGAMgASgFEhIKCnBhZ2VfdG9rZW4YBCABKAkiWwoUTGlzdFByb2R1Y3RzUmVzcG9uc2USKgoIcHJvZHVjdHMYASADKAsyGC5zdWJhc3RhY2FtcG8udjEuUHJvZHVjdBIXCg9uZXh0X3BhZ2VfdG9rZW4YAiABKAkiKQoTU3VnZ2VzdFByaWNlUmVxdWVzdBISCgpwcm9kdWN0X2lkGAEgASgJIkwKFFN1Z2dlc3RQcmljZVJlc3BvbnNlEjQKCnN1Z2dlc3Rpb24YASABKAsyIC5zdWJhc3RhY2FtcG8udjEuUHJpY2VTdWdnZXN0aW9uKuoBCg9QcmljZUZhY3RvckNvZGUSIQodUFJJQ0VfRkFDVE9SX0NPREVfVU5TUEVDSUZJRUQQABIjCh9QUklDRV9GQUNUT1JfQ09ERV9GUkVTSF9QUk9EVUNUEAESJgoiUFJJQ0VfRkFDVE9SX0NPREVfU0hPUlRfU0hFTEZfTElGRRACEiEKHVBSSUNFX0ZBQ1RPUl9DT0RFX0hJR0hfREVNQU5EEAMSIAocUFJJQ0VfRkFDVE9SX0NPREVfTE9XX0RFTUFORBAEEiIKHlBSSUNFX0ZBQ1RPUl9DT0RFX0xBUkdFX1ZPTFVNRRAFMpADCg5DYXRhbG9nU2VydmljZRJeCg1DcmVhdGVQcm9kdWN0EiUuc3ViYXN0YWNhbXBvLnYxLkNyZWF0ZVByb2R1Y3RSZXF1ZXN0GiYuc3ViYXN0YWNhbXBvLnYxLkNyZWF0ZVByb2R1Y3RSZXNwb25zZRJaCgpHZXRQcm9kdWN0EiIuc3ViYXN0YWNhbXBvLnYxLkdldFByb2R1Y3RSZXF1ZXN0GiMuc3ViYXN0YWNhbXBvLnYxLkdldFByb2R1Y3RSZXNwb25zZSIDkAIBEmAKDExpc3RQcm9kdWN0cxIkLnN1YmFzdGFjYW1wby52MS5MaXN0UHJvZHVjdHNSZXF1ZXN0GiUuc3ViYXN0YWNhbXBvLnYxLkxpc3RQcm9kdWN0c1Jlc3BvbnNlIgOQAgESYAoMU3VnZ2VzdFByaWNlEiQuc3ViYXN0YWNhbXBvLnYxLlN1Z2dlc3RQcmljZVJlcXVlc3QaJS5zdWJhc3RhY2FtcG8udjEuU3VnZ2VzdFByaWNlUmVzcG9uc2UiA5ACAWIGcHJvdG8z", [file_google_protobuf_timestamp, file_subastacampo_v1_common]);
+  fileDesc("Ch1zdWJhc3RhY2FtcG8vdjEvY2F0YWxvZy5wcm90bxIPc3ViYXN0YWNhbXBvLnYxIsICCgdQcm9kdWN0EgoKAmlkGAEgASgJEhMKC3Byb2R1Y2VyX2lkGAIgASgJEgwKBG5hbWUYAyABKAkSEwoLZGVzY3JpcHRpb24YBCABKAkSMgoIY2F0ZWdvcnkYBSABKA4yIC5zdWJhc3RhY2FtcG8udjEuUHJvZHVjdENhdGVnb3J5EhAKCHF1YW50aXR5GAYgASgBEisKBHVuaXQYByABKA4yHS5zdWJhc3RhY2FtcG8udjEuUXVhbnRpdHlVbml0EhQKDGhhcnZlc3RfZGF0ZRgIIAEoCRIXCg9zaGVsZl9saWZlX2RheXMYCSABKAUSIQoZcmVtYWluaW5nX3NoZWxmX2xpZmVfZGF5cxgKIAEoBRIuCgpjcmVhdGVkX2F0GAsgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCJMCgtQcmljZUZhY3RvchIuCgRjb2RlGAEgASgOMiAuc3ViYXN0YWNhbXBvLnYxLlByaWNlRmFjdG9yQ29kZRINCgV2YWx1ZRgCIAEoASKIAwoPUHJpY2VTdWdnZXN0aW9uEi8KD3N1Z2dlc3RlZF9wcmljZRgBIAEoCzIWLnN1YmFzdGFjYW1wby52MS5Nb25leRIpCglyYW5nZV9taW4YAiABKAsyFi5zdWJhc3RhY2FtcG8udjEuTW9uZXkSKQoJcmFuZ2VfbWF4GAMgASgLMhYuc3ViYXN0YWNhbXBvLnYxLk1vbmV5EiwKDHByaWNlX3Blcl9rZxgEIAEoCzIWLnN1YmFzdGFjYW1wby52MS5Nb25leRITCgtxdWFudGl0eV9rZxgFIAEoARIXCg9jYXRlZ29yeV9kZW1hbmQYBiABKAESLQoHZmFjdG9ycxgHIAMoCzIcLnN1YmFzdGFjYW1wby52MS5QcmljZUZhY3RvchIVCg1tb2RlbF92ZXJzaW9uGAggASgJEhYKDnJhbmdlX2NvdmVyYWdlGAkgASgBEjQKC2NvbXBhcmFibGVzGAogAygLMh8uc3ViYXN0YWNhbXBvLnYxLkNvbXBhcmFibGVTYWxlIpgBCg5Db21wYXJhYmxlU2FsZRIUCgxwcm9kdWN0X25hbWUYASABKAkSEwoLcXVhbnRpdHlfa2cYAiABKAESLAoMcHJpY2VfcGVyX2tnGAMgASgLMhYuc3ViYXN0YWNhbXBvLnYxLk1vbmV5Ei0KCWNsb3NlZF9hdBgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAi2wEKFENyZWF0ZVByb2R1Y3RSZXF1ZXN0EgwKBG5hbWUYASABKAkSEwoLZGVzY3JpcHRpb24YAiABKAkSMgoIY2F0ZWdvcnkYAyABKA4yIC5zdWJhc3RhY2FtcG8udjEuUHJvZHVjdENhdGVnb3J5EhAKCHF1YW50aXR5GAQgASgBEisKBHVuaXQYBSABKA4yHS5zdWJhc3RhY2FtcG8udjEuUXVhbnRpdHlVbml0EhQKDGhhcnZlc3RfZGF0ZRgGIAEoCRIXCg9zaGVsZl9saWZlX2RheXMYByABKAUiQgoVQ3JlYXRlUHJvZHVjdFJlc3BvbnNlEikKB3Byb2R1Y3QYASABKAsyGC5zdWJhc3RhY2FtcG8udjEuUHJvZHVjdCInChFHZXRQcm9kdWN0UmVxdWVzdBISCgpwcm9kdWN0X2lkGAEgASgJIj8KEkdldFByb2R1Y3RSZXNwb25zZRIpCgdwcm9kdWN0GAEgASgLMhguc3ViYXN0YWNhbXBvLnYxLlByb2R1Y3QigwEKE0xpc3RQcm9kdWN0c1JlcXVlc3QSMgoIY2F0ZWdvcnkYASABKA4yIC5zdWJhc3RhY2FtcG8udjEuUHJvZHVjdENhdGVnb3J5EhEKCW9ubHlfbWluZRgCIAEoCBIRCglwYWdlX3NpemUYAyABKAUSEgoKcGFnZV90b2tlbhgEIAEoCSJbChRMaXN0UHJvZHVjdHNSZXNwb25zZRIqCghwcm9kdWN0cxgBIAMoCzIYLnN1YmFzdGFjYW1wby52MS5Qcm9kdWN0EhcKD25leHRfcGFnZV90b2tlbhgCIAEoCSIpChNTdWdnZXN0UHJpY2VSZXF1ZXN0EhIKCnByb2R1Y3RfaWQYASABKAkiTAoUU3VnZ2VzdFByaWNlUmVzcG9uc2USNAoKc3VnZ2VzdGlvbhgBIAEoCzIgLnN1YmFzdGFjYW1wby52MS5QcmljZVN1Z2dlc3Rpb24iJgoWR2V0TWFya2V0UHJpY2VzUmVxdWVzdBIMCgRkYXlzGAEgASgFIlwKF0dldE1hcmtldFByaWNlc1Jlc3BvbnNlEjMKCmNhdGVnb3JpZXMYASADKAsyHy5zdWJhc3RhY2FtcG8udjEuQ2F0ZWdvcnlNYXJrZXQSDAoEZGF5cxgCIAEoBSKgAgoOQ2F0ZWdvcnlNYXJrZXQSMgoIY2F0ZWdvcnkYASABKA4yIC5zdWJhc3RhY2FtcG8udjEuUHJvZHVjdENhdGVnb3J5Eg0KBXNhbGVzGAIgASgFEjMKE21lZGlhbl9wcmljZV9wZXJfa2cYAyABKAsyFi5zdWJhc3RhY2FtcG8udjEuTW9uZXkSMwoTbG93ZXN0X3ByaWNlX3Blcl9rZxgEIAEoCzIWLnN1YmFzdGFjYW1wby52MS5Nb25leRI0ChRoaWdoZXN0X3ByaWNlX3Blcl9rZxgFIAEoCzIWLnN1YmFzdGFjYW1wby52MS5Nb25leRIrCgV3ZWVrcxgGIAMoCzIcLnN1YmFzdGFjYW1wby52MS5XZWVrbHlQcmljZSJlCgtXZWVrbHlQcmljZRISCgp3ZWVrX3N0YXJ0GAEgASgJEg0KBXNhbGVzGAIgASgFEjMKE21lZGlhbl9wcmljZV9wZXJfa2cYAyABKAsyFi5zdWJhc3RhY2FtcG8udjEuTW9uZXkq6gEKD1ByaWNlRmFjdG9yQ29kZRIhCh1QUklDRV9GQUNUT1JfQ09ERV9VTlNQRUNJRklFRBAAEiMKH1BSSUNFX0ZBQ1RPUl9DT0RFX0ZSRVNIX1BST0RVQ1QQARImCiJQUklDRV9GQUNUT1JfQ09ERV9TSE9SVF9TSEVMRl9MSUZFEAISIQodUFJJQ0VfRkFDVE9SX0NPREVfSElHSF9ERU1BTkQQAxIgChxQUklDRV9GQUNUT1JfQ09ERV9MT1dfREVNQU5EEAQSIgoeUFJJQ0VfRkFDVE9SX0NPREVfTEFSR0VfVk9MVU1FEAUy+wMKDkNhdGFsb2dTZXJ2aWNlEl4KDUNyZWF0ZVByb2R1Y3QSJS5zdWJhc3RhY2FtcG8udjEuQ3JlYXRlUHJvZHVjdFJlcXVlc3QaJi5zdWJhc3RhY2FtcG8udjEuQ3JlYXRlUHJvZHVjdFJlc3BvbnNlEloKCkdldFByb2R1Y3QSIi5zdWJhc3RhY2FtcG8udjEuR2V0UHJvZHVjdFJlcXVlc3QaIy5zdWJhc3RhY2FtcG8udjEuR2V0UHJvZHVjdFJlc3BvbnNlIgOQAgESYAoMTGlzdFByb2R1Y3RzEiQuc3ViYXN0YWNhbXBvLnYxLkxpc3RQcm9kdWN0c1JlcXVlc3QaJS5zdWJhc3RhY2FtcG8udjEuTGlzdFByb2R1Y3RzUmVzcG9uc2UiA5ACARJpCg9HZXRNYXJrZXRQcmljZXMSJy5zdWJhc3RhY2FtcG8udjEuR2V0TWFya2V0UHJpY2VzUmVxdWVzdBooLnN1YmFzdGFjYW1wby52MS5HZXRNYXJrZXRQcmljZXNSZXNwb25zZSIDkAIBEmAKDFN1Z2dlc3RQcmljZRIkLnN1YmFzdGFjYW1wby52MS5TdWdnZXN0UHJpY2VSZXF1ZXN0GiUuc3ViYXN0YWNhbXBvLnYxLlN1Z2dlc3RQcmljZVJlc3BvbnNlIgOQAgFiBnByb3RvMw", [file_google_protobuf_timestamp, file_subastacampo_v1_common]);
 
 /**
  * @generated from message subastacampo.v1.Product
@@ -158,6 +158,22 @@ export type PriceSuggestion = Message<"subastacampo.v1.PriceSuggestion"> & {
    * @generated from field: string model_version = 8;
    */
   modelVersion: string;
+
+  /**
+   * Share of closing prices the range is expected to hold: 0.8 means 8 in 10.
+   * Calibrated on auctions the model never saw, so the promise is measured.
+   *
+   * @generated from field: double range_coverage = 9;
+   */
+  rangeCoverage: number;
+
+  /**
+   * Recent closed auctions of the same category, the closest in volume first.
+   * Empty until the platform has closed auctions in the category.
+   *
+   * @generated from field: repeated subastacampo.v1.ComparableSale comparables = 10;
+   */
+  comparables: ComparableSale[];
 };
 
 /**
@@ -166,6 +182,40 @@ export type PriceSuggestion = Message<"subastacampo.v1.PriceSuggestion"> & {
  */
 export const PriceSuggestionSchema: GenMessage<PriceSuggestion> = /*@__PURE__*/
   messageDesc(file_subastacampo_v1_catalog, 2);
+
+/**
+ * A closed auction shown as evidence next to the suggestion.
+ *
+ * @generated from message subastacampo.v1.ComparableSale
+ */
+export type ComparableSale = Message<"subastacampo.v1.ComparableSale"> & {
+  /**
+   * @generated from field: string product_name = 1;
+   */
+  productName: string;
+
+  /**
+   * @generated from field: double quantity_kg = 2;
+   */
+  quantityKg: number;
+
+  /**
+   * @generated from field: subastacampo.v1.Money price_per_kg = 3;
+   */
+  pricePerKg?: Money | undefined;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp closed_at = 4;
+   */
+  closedAt?: Timestamp | undefined;
+};
+
+/**
+ * Describes the message subastacampo.v1.ComparableSale.
+ * Use `create(ComparableSaleSchema)` to create a new message.
+ */
+export const ComparableSaleSchema: GenMessage<ComparableSale> = /*@__PURE__*/
+  messageDesc(file_subastacampo_v1_catalog, 3);
 
 /**
  * @generated from message subastacampo.v1.CreateProductRequest
@@ -214,7 +264,7 @@ export type CreateProductRequest = Message<"subastacampo.v1.CreateProductRequest
  * Use `create(CreateProductRequestSchema)` to create a new message.
  */
 export const CreateProductRequestSchema: GenMessage<CreateProductRequest> = /*@__PURE__*/
-  messageDesc(file_subastacampo_v1_catalog, 3);
+  messageDesc(file_subastacampo_v1_catalog, 4);
 
 /**
  * @generated from message subastacampo.v1.CreateProductResponse
@@ -231,7 +281,7 @@ export type CreateProductResponse = Message<"subastacampo.v1.CreateProductRespon
  * Use `create(CreateProductResponseSchema)` to create a new message.
  */
 export const CreateProductResponseSchema: GenMessage<CreateProductResponse> = /*@__PURE__*/
-  messageDesc(file_subastacampo_v1_catalog, 4);
+  messageDesc(file_subastacampo_v1_catalog, 5);
 
 /**
  * @generated from message subastacampo.v1.GetProductRequest
@@ -248,7 +298,7 @@ export type GetProductRequest = Message<"subastacampo.v1.GetProductRequest"> & {
  * Use `create(GetProductRequestSchema)` to create a new message.
  */
 export const GetProductRequestSchema: GenMessage<GetProductRequest> = /*@__PURE__*/
-  messageDesc(file_subastacampo_v1_catalog, 5);
+  messageDesc(file_subastacampo_v1_catalog, 6);
 
 /**
  * @generated from message subastacampo.v1.GetProductResponse
@@ -265,7 +315,7 @@ export type GetProductResponse = Message<"subastacampo.v1.GetProductResponse"> &
  * Use `create(GetProductResponseSchema)` to create a new message.
  */
 export const GetProductResponseSchema: GenMessage<GetProductResponse> = /*@__PURE__*/
-  messageDesc(file_subastacampo_v1_catalog, 6);
+  messageDesc(file_subastacampo_v1_catalog, 7);
 
 /**
  * @generated from message subastacampo.v1.ListProductsRequest
@@ -305,7 +355,7 @@ export type ListProductsRequest = Message<"subastacampo.v1.ListProductsRequest">
  * Use `create(ListProductsRequestSchema)` to create a new message.
  */
 export const ListProductsRequestSchema: GenMessage<ListProductsRequest> = /*@__PURE__*/
-  messageDesc(file_subastacampo_v1_catalog, 7);
+  messageDesc(file_subastacampo_v1_catalog, 8);
 
 /**
  * @generated from message subastacampo.v1.ListProductsResponse
@@ -329,7 +379,7 @@ export type ListProductsResponse = Message<"subastacampo.v1.ListProductsResponse
  * Use `create(ListProductsResponseSchema)` to create a new message.
  */
 export const ListProductsResponseSchema: GenMessage<ListProductsResponse> = /*@__PURE__*/
-  messageDesc(file_subastacampo_v1_catalog, 8);
+  messageDesc(file_subastacampo_v1_catalog, 9);
 
 /**
  * @generated from message subastacampo.v1.SuggestPriceRequest
@@ -346,7 +396,7 @@ export type SuggestPriceRequest = Message<"subastacampo.v1.SuggestPriceRequest">
  * Use `create(SuggestPriceRequestSchema)` to create a new message.
  */
 export const SuggestPriceRequestSchema: GenMessage<SuggestPriceRequest> = /*@__PURE__*/
-  messageDesc(file_subastacampo_v1_catalog, 9);
+  messageDesc(file_subastacampo_v1_catalog, 10);
 
 /**
  * @generated from message subastacampo.v1.SuggestPriceResponse
@@ -363,7 +413,125 @@ export type SuggestPriceResponse = Message<"subastacampo.v1.SuggestPriceResponse
  * Use `create(SuggestPriceResponseSchema)` to create a new message.
  */
 export const SuggestPriceResponseSchema: GenMessage<SuggestPriceResponse> = /*@__PURE__*/
-  messageDesc(file_subastacampo_v1_catalog, 10);
+  messageDesc(file_subastacampo_v1_catalog, 11);
+
+/**
+ * @generated from message subastacampo.v1.GetMarketPricesRequest
+ */
+export type GetMarketPricesRequest = Message<"subastacampo.v1.GetMarketPricesRequest"> & {
+  /**
+   * Days back to cover, 7 to 180. Defaults to 60 when unset.
+   *
+   * @generated from field: int32 days = 1;
+   */
+  days: number;
+};
+
+/**
+ * Describes the message subastacampo.v1.GetMarketPricesRequest.
+ * Use `create(GetMarketPricesRequestSchema)` to create a new message.
+ */
+export const GetMarketPricesRequestSchema: GenMessage<GetMarketPricesRequest> = /*@__PURE__*/
+  messageDesc(file_subastacampo_v1_catalog, 12);
+
+/**
+ * @generated from message subastacampo.v1.GetMarketPricesResponse
+ */
+export type GetMarketPricesResponse = Message<"subastacampo.v1.GetMarketPricesResponse"> & {
+  /**
+   * Only categories with at least one sale in the period, most sales first.
+   *
+   * @generated from field: repeated subastacampo.v1.CategoryMarket categories = 1;
+   */
+  categories: CategoryMarket[];
+
+  /**
+   * @generated from field: int32 days = 2;
+   */
+  days: number;
+};
+
+/**
+ * Describes the message subastacampo.v1.GetMarketPricesResponse.
+ * Use `create(GetMarketPricesResponseSchema)` to create a new message.
+ */
+export const GetMarketPricesResponseSchema: GenMessage<GetMarketPricesResponse> = /*@__PURE__*/
+  messageDesc(file_subastacampo_v1_catalog, 13);
+
+/**
+ * @generated from message subastacampo.v1.CategoryMarket
+ */
+export type CategoryMarket = Message<"subastacampo.v1.CategoryMarket"> & {
+  /**
+   * @generated from field: subastacampo.v1.ProductCategory category = 1;
+   */
+  category: ProductCategory;
+
+  /**
+   * Closed auctions that ended with a winner.
+   *
+   * @generated from field: int32 sales = 2;
+   */
+  sales: number;
+
+  /**
+   * @generated from field: subastacampo.v1.Money median_price_per_kg = 3;
+   */
+  medianPricePerKg?: Money | undefined;
+
+  /**
+   * @generated from field: subastacampo.v1.Money lowest_price_per_kg = 4;
+   */
+  lowestPricePerKg?: Money | undefined;
+
+  /**
+   * @generated from field: subastacampo.v1.Money highest_price_per_kg = 5;
+   */
+  highestPricePerKg?: Money | undefined;
+
+  /**
+   * Oldest week first.
+   *
+   * @generated from field: repeated subastacampo.v1.WeeklyPrice weeks = 6;
+   */
+  weeks: WeeklyPrice[];
+};
+
+/**
+ * Describes the message subastacampo.v1.CategoryMarket.
+ * Use `create(CategoryMarketSchema)` to create a new message.
+ */
+export const CategoryMarketSchema: GenMessage<CategoryMarket> = /*@__PURE__*/
+  messageDesc(file_subastacampo_v1_catalog, 14);
+
+/**
+ * @generated from message subastacampo.v1.WeeklyPrice
+ */
+export type WeeklyPrice = Message<"subastacampo.v1.WeeklyPrice"> & {
+  /**
+   * ISO 8601 date (YYYY-MM-DD) of the Monday that starts the week.
+   *
+   * @generated from field: string week_start = 1;
+   */
+  weekStart: string;
+
+  /**
+   * @generated from field: int32 sales = 2;
+   */
+  sales: number;
+
+  /**
+   * @generated from field: subastacampo.v1.Money median_price_per_kg = 3;
+   */
+  medianPricePerKg?: Money | undefined;
+};
+
+/**
+ * Describes the message subastacampo.v1.WeeklyPrice.
+ * Use `create(WeeklyPriceSchema)` to create a new message.
+ */
+export const WeeklyPriceSchema: GenMessage<WeeklyPrice> = /*@__PURE__*/
+  messageDesc(file_subastacampo_v1_catalog, 15);
 
 /**
  * Why the model suggested a given price. Clients render the text.
@@ -444,7 +612,17 @@ export const CatalogService: GenService<{
   },
   /**
    * Suggests a price with the pricing model, explaining the main factors.
+   * Price per kilo the platform's closed auctions reached, by category and week.
+   * Public: producers check it before pricing, buyers before bidding.
    *
+   * @generated from rpc subastacampo.v1.CatalogService.GetMarketPrices
+   */
+  getMarketPrices: {
+    methodKind: "unary";
+    input: typeof GetMarketPricesRequestSchema;
+    output: typeof GetMarketPricesResponseSchema;
+  },
+  /**
    * @generated from rpc subastacampo.v1.CatalogService.SuggestPrice
    */
   suggestPrice: {

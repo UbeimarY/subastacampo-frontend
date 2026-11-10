@@ -16,7 +16,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file subastacampo/v1/auction.proto.
  */
 export const file_subastacampo_v1_auction: GenFile = /*@__PURE__*/
-  fileDesc("Ch1zdWJhc3RhY2FtcG8vdjEvYXVjdGlvbi5wcm90bxIPc3ViYXN0YWNhbXBvLnYxItoDCgdBdWN0aW9uEgoKAmlkGAEgASgJEikKB3Byb2R1Y3QYAiABKAsyGC5zdWJhc3RhY2FtcG8udjEuUHJvZHVjdBIuCg5zdGFydGluZ19wcmljZRgDIAEoCzIWLnN1YmFzdGFjYW1wby52MS5Nb25leRItCg1taW5faW5jcmVtZW50GAQgASgLMhYuc3ViYXN0YWNhbXBvLnYxLk1vbmV5Ei0KDWN1cnJlbnRfcHJpY2UYBSABKAsyFi5zdWJhc3RhY2FtcG8udjEuTW9uZXkSLAoMbmV4dF9taW5fYmlkGAYgASgLMhYuc3ViYXN0YWNhbXBvLnYxLk1vbmV5Ei0KCXN0YXJ0c19hdBgHIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASKwoHZW5kc19hdBgIIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLgoGc3RhdHVzGAkgASgOMh4uc3ViYXN0YWNhbXBvLnYxLkF1Y3Rpb25TdGF0dXMSFwoPZXh0ZW5zaW9uX2NvdW50GAogASgFEhEKCWJpZF9jb3VudBgLIAEoBRIWCgl3aW5uZXJfaWQYDCABKAlIAIgBAUIMCgpfd2lubmVyX2lkIngKDlJpc2tBc3Nlc3NtZW50Eg0KBXNjb3JlGAEgASgFEikKBWxldmVsGAIgASgOMhouc3ViYXN0YWNhbXBvLnYxLlJpc2tMZXZlbBIsCgdzaWduYWxzGAMgAygOMhsuc3ViYXN0YWNhbXBvLnYxLlJpc2tTaWduYWwi7QEKA0JpZBIKCgJpZBgBIAEoCRISCgphdWN0aW9uX2lkGAIgASgJEhEKCWJpZGRlcl9pZBgDIAEoCRIVCg1iaWRkZXJfbnVtYmVyGAQgASgFEiYKBmFtb3VudBgFIAEoCzIWLnN1YmFzdGFjYW1wby52MS5Nb25leRItCglwbGFjZWRfYXQYBiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhYKDmV4dGVuZGVkX2Nsb3NlGAcgASgIEi0KBHJpc2sYCCABKAsyHy5zdWJhc3RhY2FtcG8udjEuUmlza0Fzc2Vzc21lbnQitgEKFENyZWF0ZUF1Y3Rpb25SZXF1ZXN0EhIKCnByb2R1Y3RfaWQYASABKAkSLgoOc3RhcnRpbmdfcHJpY2UYAiABKAsyFi5zdWJhc3RhY2FtcG8udjEuTW9uZXkSLQoNbWluX2luY3JlbWVudBgDIAEoCzIWLnN1YmFzdGFjYW1wby52MS5Nb25leRIrCghkdXJhdGlvbhgEIAEoCzIZLmdvb2dsZS5wcm90b2J1Zi5EdXJhdGlvbiJCChVDcmVhdGVBdWN0aW9uUmVzcG9uc2USKQoHYXVjdGlvbhgBIAEoCzIYLnN1YmFzdGFjYW1wby52MS5BdWN0aW9uIicKEUdldEF1Y3Rpb25SZXF1ZXN0EhIKCmF1Y3Rpb25faWQYASABKAkiYwoSR2V0QXVjdGlvblJlc3BvbnNlEikKB2F1Y3Rpb24YASABKAsyGC5zdWJhc3RhY2FtcG8udjEuQXVjdGlvbhIiCgRiaWRzGAIgAygLMhQuc3ViYXN0YWNhbXBvLnYxLkJpZCKaAQoTTGlzdEF1Y3Rpb25zUmVxdWVzdBIuCgZzdGF0dXMYASABKA4yHi5zdWJhc3RhY2FtcG8udjEuQXVjdGlvblN0YXR1cxIsCgVzY29wZRgCIAEoDjIdLnN1YmFzdGFjYW1wby52MS5BdWN0aW9uU2NvcGUSEQoJcGFnZV9zaXplGAMgASgFEhIKCnBhZ2VfdG9rZW4YBCABKAkiWwoUTGlzdEF1Y3Rpb25zUmVzcG9uc2USKgoIYXVjdGlvbnMYASADKAsyGC5zdWJhc3RhY2FtcG8udjEuQXVjdGlvbhIXCg9uZXh0X3BhZ2VfdG9rZW4YAiABKAkiYQoPUGxhY2VCaWRSZXF1ZXN0EhIKCmF1Y3Rpb25faWQYASABKAkSJgoGYW1vdW50GAIgASgLMhYuc3ViYXN0YWNhbXBvLnYxLk1vbmV5EhIKCnJlcXVlc3RfaWQYAyABKAkiYAoQUGxhY2VCaWRSZXNwb25zZRIhCgNiaWQYASABKAsyFC5zdWJhc3RhY2FtcG8udjEuQmlkEikKB2F1Y3Rpb24YAiABKAsyGC5zdWJhc3RhY2FtcG8udjEuQXVjdGlvbiIpChNXYXRjaEF1Y3Rpb25SZXF1ZXN0EhIKCmF1Y3Rpb25faWQYASABKAkiwQEKFFdhdGNoQXVjdGlvblJlc3BvbnNlEjQKCHNuYXBzaG90GAEgASgLMiAuc3ViYXN0YWNhbXBvLnYxLkF1Y3Rpb25TbmFwc2hvdEgAEjAKCmJpZF9wbGFjZWQYAiABKAsyGi5zdWJhc3RhY2FtcG8udjEuQmlkUGxhY2VkSAASOAoOYXVjdGlvbl9jbG9zZWQYAyABKAsyHi5zdWJhc3RhY2FtcG8udjEuQXVjdGlvbkNsb3NlZEgAQgcKBWV2ZW50ImAKD0F1Y3Rpb25TbmFwc2hvdBIpCgdhdWN0aW9uGAEgASgLMhguc3ViYXN0YWNhbXBvLnYxLkF1Y3Rpb24SIgoEYmlkcxgCIAMoCzIULnN1YmFzdGFjYW1wby52MS5CaWQiWQoJQmlkUGxhY2VkEiEKA2JpZBgBIAEoCzIULnN1YmFzdGFjYW1wby52MS5CaWQSKQoHYXVjdGlvbhgCIAEoCzIYLnN1YmFzdGFjYW1wby52MS5BdWN0aW9uIjoKDUF1Y3Rpb25DbG9zZWQSKQoHYXVjdGlvbhgBIAEoCzIYLnN1YmFzdGFjYW1wby52MS5BdWN0aW9uIi4KGEdldEF1Y3Rpb25Db250YWN0UmVxdWVzdBISCgphdWN0aW9uX2lkGAEgASgJIqUBCg5BdWN0aW9uQ29udGFjdBInCgRyb2xlGAEgASgOMhkuc3ViYXN0YWNhbXBvLnYxLlVzZXJSb2xlEhEKCWZ1bGxfbmFtZRgCIAEoCRINCgVlbWFpbBgDIAEoCRISCgVwaG9uZRgEIAEoCUgAiAEBEhkKDG11bmljaXBhbGl0eRgFIAEoCUgBiAEBQggKBl9waG9uZUIPCg1fbXVuaWNpcGFsaXR5InoKGUdldEF1Y3Rpb25Db250YWN0UmVzcG9uc2USMAoHY29udGFjdBgBIAEoCzIfLnN1YmFzdGFjYW1wby52MS5BdWN0aW9uQ29udGFjdBIrCgtmaW5hbF9wcmljZRgCIAEoCzIWLnN1YmFzdGFjYW1wby52MS5Nb25leSqhAQoNQXVjdGlvblN0YXR1cxIeChpBVUNUSU9OX1NUQVRVU19VTlNQRUNJRklFRBAAEhwKGEFVQ1RJT05fU1RBVFVTX1NDSEVEVUxFRBABEhkKFUFVQ1RJT05fU1RBVFVTX0FDVElWRRACEhkKFUFVQ1RJT05fU1RBVFVTX0NMT1NFRBADEhwKGEFVQ1RJT05fU1RBVFVTX0NBTkNFTExFRBAEKmcKDEF1Y3Rpb25TY29wZRIdChlBVUNUSU9OX1NDT1BFX1VOU1BFQ0lGSUVEEAASHQoZQVVDVElPTl9TQ09QRV9NWV9QUk9EVUNUUxABEhkKFUFVQ1RJT05fU0NPUEVfTVlfQklEUxACKmcKCVJpc2tMZXZlbBIaChZSSVNLX0xFVkVMX1VOU1BFQ0lGSUVEEAASEgoOUklTS19MRVZFTF9MT1cQARIVChFSSVNLX0xFVkVMX01FRElVTRACEhMKD1JJU0tfTEVWRUxfSElHSBADKqACCgpSaXNrU2lnbmFsEhsKF1JJU0tfU0lHTkFMX1VOU1BFQ0lGSUVEEAASHwobUklTS19TSUdOQUxfTEFTVF8xMF9TRUNPTkRTEAESHwobUklTS19TSUdOQUxfTEFTVF8zMF9TRUNPTkRTEAISIgoeUklTS19TSUdOQUxfRklSU1RfQklEX0FUX0NMT1NFEAMSIwofUklTS19TSUdOQUxfUkVQRUFURURfRVhURU5TSU9OUxAEEhsKF1JJU0tfU0lHTkFMX05FV19BQ0NPVU5UEAUSIQodUklTS19TSUdOQUxfTEFTVF9NSU5VVEVfSEFCSVQQBhIqCiZSSVNLX1NJR05BTF9TSEFSRVNfUEhPTkVfV0lUSF9QUk9EVUNFUhAHMs8ECg5BdWN0aW9uU2VydmljZRJeCg1DcmVhdGVBdWN0aW9uEiUuc3ViYXN0YWNhbXBvLnYxLkNyZWF0ZUF1Y3Rpb25SZXF1ZXN0GiYuc3ViYXN0YWNhbXBvLnYxLkNyZWF0ZUF1Y3Rpb25SZXNwb25zZRJaCgpHZXRBdWN0aW9uEiIuc3ViYXN0YWNhbXBvLnYxLkdldEF1Y3Rpb25SZXF1ZXN0GiMuc3ViYXN0YWNhbXBvLnYxLkdldEF1Y3Rpb25SZXNwb25zZSIDkAIBEmAKDExpc3RBdWN0aW9ucxIkLnN1YmFzdGFjYW1wby52MS5MaXN0QXVjdGlvbnNSZXF1ZXN0GiUuc3ViYXN0YWNhbXBvLnYxLkxpc3RBdWN0aW9uc1Jlc3BvbnNlIgOQAgESTwoIUGxhY2VCaWQSIC5zdWJhc3RhY2FtcG8udjEuUGxhY2VCaWRSZXF1ZXN0GiEuc3ViYXN0YWNhbXBvLnYxLlBsYWNlQmlkUmVzcG9uc2USXQoMV2F0Y2hBdWN0aW9uEiQuc3ViYXN0YWNhbXBvLnYxLldhdGNoQXVjdGlvblJlcXVlc3QaJS5zdWJhc3RhY2FtcG8udjEuV2F0Y2hBdWN0aW9uUmVzcG9uc2UwARJvChFHZXRBdWN0aW9uQ29udGFjdBIpLnN1YmFzdGFjYW1wby52MS5HZXRBdWN0aW9uQ29udGFjdFJlcXVlc3QaKi5zdWJhc3RhY2FtcG8udjEuR2V0QXVjdGlvbkNvbnRhY3RSZXNwb25zZSIDkAIBYgZwcm90bzM", [file_google_protobuf_duration, file_google_protobuf_timestamp, file_subastacampo_v1_catalog, file_subastacampo_v1_common]);
+  fileDesc("Ch1zdWJhc3RhY2FtcG8vdjEvYXVjdGlvbi5wcm90bxIPc3ViYXN0YWNhbXBvLnYxItoDCgdBdWN0aW9uEgoKAmlkGAEgASgJEikKB3Byb2R1Y3QYAiABKAsyGC5zdWJhc3RhY2FtcG8udjEuUHJvZHVjdBIuCg5zdGFydGluZ19wcmljZRgDIAEoCzIWLnN1YmFzdGFjYW1wby52MS5Nb25leRItCg1taW5faW5jcmVtZW50GAQgASgLMhYuc3ViYXN0YWNhbXBvLnYxLk1vbmV5Ei0KDWN1cnJlbnRfcHJpY2UYBSABKAsyFi5zdWJhc3RhY2FtcG8udjEuTW9uZXkSLAoMbmV4dF9taW5fYmlkGAYgASgLMhYuc3ViYXN0YWNhbXBvLnYxLk1vbmV5Ei0KCXN0YXJ0c19hdBgHIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASKwoHZW5kc19hdBgIIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLgoGc3RhdHVzGAkgASgOMh4uc3ViYXN0YWNhbXBvLnYxLkF1Y3Rpb25TdGF0dXMSFwoPZXh0ZW5zaW9uX2NvdW50GAogASgFEhEKCWJpZF9jb3VudBgLIAEoBRIWCgl3aW5uZXJfaWQYDCABKAlIAIgBAUIMCgpfd2lubmVyX2lkIngKDlJpc2tBc3Nlc3NtZW50Eg0KBXNjb3JlGAEgASgFEikKBWxldmVsGAIgASgOMhouc3ViYXN0YWNhbXBvLnYxLlJpc2tMZXZlbBIsCgdzaWduYWxzGAMgAygOMhsuc3ViYXN0YWNhbXBvLnYxLlJpc2tTaWduYWwigAIKA0JpZBIKCgJpZBgBIAEoCRISCgphdWN0aW9uX2lkGAIgASgJEhEKCWJpZGRlcl9pZBgDIAEoCRIVCg1iaWRkZXJfbnVtYmVyGAQgASgFEiYKBmFtb3VudBgFIAEoCzIWLnN1YmFzdGFjYW1wby52MS5Nb25leRItCglwbGFjZWRfYXQYBiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhYKDmV4dGVuZGVkX2Nsb3NlGAcgASgIEi0KBHJpc2sYCCABKAsyHy5zdWJhc3RhY2FtcG8udjEuUmlza0Fzc2Vzc21lbnQSEQoJYXV0b21hdGljGAkgASgIIrYBChRDcmVhdGVBdWN0aW9uUmVxdWVzdBISCgpwcm9kdWN0X2lkGAEgASgJEi4KDnN0YXJ0aW5nX3ByaWNlGAIgASgLMhYuc3ViYXN0YWNhbXBvLnYxLk1vbmV5Ei0KDW1pbl9pbmNyZW1lbnQYAyABKAsyFi5zdWJhc3RhY2FtcG8udjEuTW9uZXkSKwoIZHVyYXRpb24YBCABKAsyGS5nb29nbGUucHJvdG9idWYuRHVyYXRpb24iQgoVQ3JlYXRlQXVjdGlvblJlc3BvbnNlEikKB2F1Y3Rpb24YASABKAsyGC5zdWJhc3RhY2FtcG8udjEuQXVjdGlvbiInChFHZXRBdWN0aW9uUmVxdWVzdBISCgphdWN0aW9uX2lkGAEgASgJImMKEkdldEF1Y3Rpb25SZXNwb25zZRIpCgdhdWN0aW9uGAEgASgLMhguc3ViYXN0YWNhbXBvLnYxLkF1Y3Rpb24SIgoEYmlkcxgCIAMoCzIULnN1YmFzdGFjYW1wby52MS5CaWQimgEKE0xpc3RBdWN0aW9uc1JlcXVlc3QSLgoGc3RhdHVzGAEgASgOMh4uc3ViYXN0YWNhbXBvLnYxLkF1Y3Rpb25TdGF0dXMSLAoFc2NvcGUYAiABKA4yHS5zdWJhc3RhY2FtcG8udjEuQXVjdGlvblNjb3BlEhEKCXBhZ2Vfc2l6ZRgDIAEoBRISCgpwYWdlX3Rva2VuGAQgASgJIlsKFExpc3RBdWN0aW9uc1Jlc3BvbnNlEioKCGF1Y3Rpb25zGAEgAygLMhguc3ViYXN0YWNhbXBvLnYxLkF1Y3Rpb24SFwoPbmV4dF9wYWdlX3Rva2VuGAIgASgJImEKD1BsYWNlQmlkUmVxdWVzdBISCgphdWN0aW9uX2lkGAEgASgJEiYKBmFtb3VudBgCIAEoCzIWLnN1YmFzdGFjYW1wby52MS5Nb25leRISCgpyZXF1ZXN0X2lkGAMgASgJImAKEFBsYWNlQmlkUmVzcG9uc2USIQoDYmlkGAEgASgLMhQuc3ViYXN0YWNhbXBvLnYxLkJpZBIpCgdhdWN0aW9uGAIgASgLMhguc3ViYXN0YWNhbXBvLnYxLkF1Y3Rpb24iKQoTV2F0Y2hBdWN0aW9uUmVxdWVzdBISCgphdWN0aW9uX2lkGAEgASgJIsEBChRXYXRjaEF1Y3Rpb25SZXNwb25zZRI0CghzbmFwc2hvdBgBIAEoCzIgLnN1YmFzdGFjYW1wby52MS5BdWN0aW9uU25hcHNob3RIABIwCgpiaWRfcGxhY2VkGAIgASgLMhouc3ViYXN0YWNhbXBvLnYxLkJpZFBsYWNlZEgAEjgKDmF1Y3Rpb25fY2xvc2VkGAMgASgLMh4uc3ViYXN0YWNhbXBvLnYxLkF1Y3Rpb25DbG9zZWRIAEIHCgVldmVudCJgCg9BdWN0aW9uU25hcHNob3QSKQoHYXVjdGlvbhgBIAEoCzIYLnN1YmFzdGFjYW1wby52MS5BdWN0aW9uEiIKBGJpZHMYAiADKAsyFC5zdWJhc3RhY2FtcG8udjEuQmlkIlkKCUJpZFBsYWNlZBIhCgNiaWQYASABKAsyFC5zdWJhc3RhY2FtcG8udjEuQmlkEikKB2F1Y3Rpb24YAiABKAsyGC5zdWJhc3RhY2FtcG8udjEuQXVjdGlvbiI6Cg1BdWN0aW9uQ2xvc2VkEikKB2F1Y3Rpb24YASABKAsyGC5zdWJhc3RhY2FtcG8udjEuQXVjdGlvbiIuChhHZXRBdWN0aW9uQ29udGFjdFJlcXVlc3QSEgoKYXVjdGlvbl9pZBgBIAEoCSKlAQoOQXVjdGlvbkNvbnRhY3QSJwoEcm9sZRgBIAEoDjIZLnN1YmFzdGFjYW1wby52MS5Vc2VyUm9sZRIRCglmdWxsX25hbWUYAiABKAkSDQoFZW1haWwYAyABKAkSEgoFcGhvbmUYBCABKAlIAIgBARIZCgxtdW5pY2lwYWxpdHkYBSABKAlIAYgBAUIICgZfcGhvbmVCDwoNX211bmljaXBhbGl0eSJ6ChlHZXRBdWN0aW9uQ29udGFjdFJlc3BvbnNlEjAKB2NvbnRhY3QYASABKAsyHy5zdWJhc3RhY2FtcG8udjEuQXVjdGlvbkNvbnRhY3QSKwoLZmluYWxfcHJpY2UYAiABKAsyFi5zdWJhc3RhY2FtcG8udjEuTW9uZXkijAEKB0F1dG9CaWQSEgoKYXVjdGlvbl9pZBgBIAEoCRIqCgptYXhfYW1vdW50GAIgASgLMhYuc3ViYXN0YWNhbXBvLnYxLk1vbmV5EhEKCWV4aGF1c3RlZBgDIAEoCBIuCgp1cGRhdGVkX2F0GAQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCJTChFTZXRBdXRvQmlkUmVxdWVzdBISCgphdWN0aW9uX2lkGAEgASgJEioKCm1heF9hbW91bnQYAiABKAsyFi5zdWJhc3RhY2FtcG8udjEuTW9uZXkiawoSU2V0QXV0b0JpZFJlc3BvbnNlEioKCGF1dG9fYmlkGAEgASgLMhguc3ViYXN0YWNhbXBvLnYxLkF1dG9CaWQSKQoHYXVjdGlvbhgCIAEoCzIYLnN1YmFzdGFjYW1wby52MS5BdWN0aW9uIioKFENhbmNlbEF1dG9CaWRSZXF1ZXN0EhIKCmF1Y3Rpb25faWQYASABKAkiFwoVQ2FuY2VsQXV0b0JpZFJlc3BvbnNlIicKEUdldEF1dG9CaWRSZXF1ZXN0EhIKCmF1Y3Rpb25faWQYASABKAkiQAoSR2V0QXV0b0JpZFJlc3BvbnNlEioKCGF1dG9fYmlkGAEgASgLMhguc3ViYXN0YWNhbXBvLnYxLkF1dG9CaWQqoQEKDUF1Y3Rpb25TdGF0dXMSHgoaQVVDVElPTl9TVEFUVVNfVU5TUEVDSUZJRUQQABIcChhBVUNUSU9OX1NUQVRVU19TQ0hFRFVMRUQQARIZChVBVUNUSU9OX1NUQVRVU19BQ1RJVkUQAhIZChVBVUNUSU9OX1NUQVRVU19DTE9TRUQQAxIcChhBVUNUSU9OX1NUQVRVU19DQU5DRUxMRUQQBCpnCgxBdWN0aW9uU2NvcGUSHQoZQVVDVElPTl9TQ09QRV9VTlNQRUNJRklFRBAAEh0KGUFVQ1RJT05fU0NPUEVfTVlfUFJPRFVDVFMQARIZChVBVUNUSU9OX1NDT1BFX01ZX0JJRFMQAipnCglSaXNrTGV2ZWwSGgoWUklTS19MRVZFTF9VTlNQRUNJRklFRBAAEhIKDlJJU0tfTEVWRUxfTE9XEAESFQoRUklTS19MRVZFTF9NRURJVU0QAhITCg9SSVNLX0xFVkVMX0hJR0gQAyqgAgoKUmlza1NpZ25hbBIbChdSSVNLX1NJR05BTF9VTlNQRUNJRklFRBAAEh8KG1JJU0tfU0lHTkFMX0xBU1RfMTBfU0VDT05EUxABEh8KG1JJU0tfU0lHTkFMX0xBU1RfMzBfU0VDT05EUxACEiIKHlJJU0tfU0lHTkFMX0ZJUlNUX0JJRF9BVF9DTE9TRRADEiMKH1JJU0tfU0lHTkFMX1JFUEVBVEVEX0VYVEVOU0lPTlMQBBIbChdSSVNLX1NJR05BTF9ORVdfQUNDT1VOVBAFEiEKHVJJU0tfU0lHTkFMX0xBU1RfTUlOVVRFX0hBQklUEAYSKgomUklTS19TSUdOQUxfU0hBUkVTX1BIT05FX1dJVEhfUFJPRFVDRVIQBzLiBgoOQXVjdGlvblNlcnZpY2USXgoNQ3JlYXRlQXVjdGlvbhIlLnN1YmFzdGFjYW1wby52MS5DcmVhdGVBdWN0aW9uUmVxdWVzdBomLnN1YmFzdGFjYW1wby52MS5DcmVhdGVBdWN0aW9uUmVzcG9uc2USWgoKR2V0QXVjdGlvbhIiLnN1YmFzdGFjYW1wby52MS5HZXRBdWN0aW9uUmVxdWVzdBojLnN1YmFzdGFjYW1wby52MS5HZXRBdWN0aW9uUmVzcG9uc2UiA5ACARJgCgxMaXN0QXVjdGlvbnMSJC5zdWJhc3RhY2FtcG8udjEuTGlzdEF1Y3Rpb25zUmVxdWVzdBolLnN1YmFzdGFjYW1wby52MS5MaXN0QXVjdGlvbnNSZXNwb25zZSIDkAIBEk8KCFBsYWNlQmlkEiAuc3ViYXN0YWNhbXBvLnYxLlBsYWNlQmlkUmVxdWVzdBohLnN1YmFzdGFjYW1wby52MS5QbGFjZUJpZFJlc3BvbnNlEl0KDFdhdGNoQXVjdGlvbhIkLnN1YmFzdGFjYW1wby52MS5XYXRjaEF1Y3Rpb25SZXF1ZXN0GiUuc3ViYXN0YWNhbXBvLnYxLldhdGNoQXVjdGlvblJlc3BvbnNlMAESVQoKU2V0QXV0b0JpZBIiLnN1YmFzdGFjYW1wby52MS5TZXRBdXRvQmlkUmVxdWVzdBojLnN1YmFzdGFjYW1wby52MS5TZXRBdXRvQmlkUmVzcG9uc2USXgoNQ2FuY2VsQXV0b0JpZBIlLnN1YmFzdGFjYW1wby52MS5DYW5jZWxBdXRvQmlkUmVxdWVzdBomLnN1YmFzdGFjYW1wby52MS5DYW5jZWxBdXRvQmlkUmVzcG9uc2USWgoKR2V0QXV0b0JpZBIiLnN1YmFzdGFjYW1wby52MS5HZXRBdXRvQmlkUmVxdWVzdBojLnN1YmFzdGFjYW1wby52MS5HZXRBdXRvQmlkUmVzcG9uc2UiA5ACARJvChFHZXRBdWN0aW9uQ29udGFjdBIpLnN1YmFzdGFjYW1wby52MS5HZXRBdWN0aW9uQ29udGFjdFJlcXVlc3QaKi5zdWJhc3RhY2FtcG8udjEuR2V0QXVjdGlvbkNvbnRhY3RSZXNwb25zZSIDkAIBYgZwcm90bzM", [file_google_protobuf_duration, file_google_protobuf_timestamp, file_subastacampo_v1_catalog, file_subastacampo_v1_common]);
 
 /**
  * @generated from message subastacampo.v1.Auction
@@ -175,6 +175,13 @@ export type Bid = Message<"subastacampo.v1.Bid"> & {
    * @generated from field: subastacampo.v1.RiskAssessment risk = 8;
    */
   risk?: RiskAssessment | undefined;
+
+  /**
+   * Placed by the server for the bidder, within their automatic-bid maximum.
+   *
+   * @generated from field: bool automatic = 9;
+   */
+  automatic: boolean;
 };
 
 /**
@@ -586,6 +593,152 @@ export const GetAuctionContactResponseSchema: GenMessage<GetAuctionContactRespon
   messageDesc(file_subastacampo_v1_auction, 18);
 
 /**
+ * @generated from message subastacampo.v1.AutoBid
+ */
+export type AutoBid = Message<"subastacampo.v1.AutoBid"> & {
+  /**
+   * @generated from field: string auction_id = 1;
+   */
+  auctionId: string;
+
+  /**
+   * @generated from field: subastacampo.v1.Money max_amount = 2;
+   */
+  maxAmount?: Money | undefined;
+
+  /**
+   * True when rivals already went above the maximum: it will not bid again.
+   *
+   * @generated from field: bool exhausted = 3;
+   */
+  exhausted: boolean;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp updated_at = 4;
+   */
+  updatedAt?: Timestamp | undefined;
+};
+
+/**
+ * Describes the message subastacampo.v1.AutoBid.
+ * Use `create(AutoBidSchema)` to create a new message.
+ */
+export const AutoBidSchema: GenMessage<AutoBid> = /*@__PURE__*/
+  messageDesc(file_subastacampo_v1_auction, 19);
+
+/**
+ * @generated from message subastacampo.v1.SetAutoBidRequest
+ */
+export type SetAutoBidRequest = Message<"subastacampo.v1.SetAutoBidRequest"> & {
+  /**
+   * @generated from field: string auction_id = 1;
+   */
+  auctionId: string;
+
+  /**
+   * @generated from field: subastacampo.v1.Money max_amount = 2;
+   */
+  maxAmount?: Money | undefined;
+};
+
+/**
+ * Describes the message subastacampo.v1.SetAutoBidRequest.
+ * Use `create(SetAutoBidRequestSchema)` to create a new message.
+ */
+export const SetAutoBidRequestSchema: GenMessage<SetAutoBidRequest> = /*@__PURE__*/
+  messageDesc(file_subastacampo_v1_auction, 20);
+
+/**
+ * @generated from message subastacampo.v1.SetAutoBidResponse
+ */
+export type SetAutoBidResponse = Message<"subastacampo.v1.SetAutoBidResponse"> & {
+  /**
+   * @generated from field: subastacampo.v1.AutoBid auto_bid = 1;
+   */
+  autoBid?: AutoBid | undefined;
+
+  /**
+   * The auction after any bids the new maximum triggered.
+   *
+   * @generated from field: subastacampo.v1.Auction auction = 2;
+   */
+  auction?: Auction | undefined;
+};
+
+/**
+ * Describes the message subastacampo.v1.SetAutoBidResponse.
+ * Use `create(SetAutoBidResponseSchema)` to create a new message.
+ */
+export const SetAutoBidResponseSchema: GenMessage<SetAutoBidResponse> = /*@__PURE__*/
+  messageDesc(file_subastacampo_v1_auction, 21);
+
+/**
+ * @generated from message subastacampo.v1.CancelAutoBidRequest
+ */
+export type CancelAutoBidRequest = Message<"subastacampo.v1.CancelAutoBidRequest"> & {
+  /**
+   * @generated from field: string auction_id = 1;
+   */
+  auctionId: string;
+};
+
+/**
+ * Describes the message subastacampo.v1.CancelAutoBidRequest.
+ * Use `create(CancelAutoBidRequestSchema)` to create a new message.
+ */
+export const CancelAutoBidRequestSchema: GenMessage<CancelAutoBidRequest> = /*@__PURE__*/
+  messageDesc(file_subastacampo_v1_auction, 22);
+
+/**
+ * @generated from message subastacampo.v1.CancelAutoBidResponse
+ */
+export type CancelAutoBidResponse = Message<"subastacampo.v1.CancelAutoBidResponse"> & {
+};
+
+/**
+ * Describes the message subastacampo.v1.CancelAutoBidResponse.
+ * Use `create(CancelAutoBidResponseSchema)` to create a new message.
+ */
+export const CancelAutoBidResponseSchema: GenMessage<CancelAutoBidResponse> = /*@__PURE__*/
+  messageDesc(file_subastacampo_v1_auction, 23);
+
+/**
+ * @generated from message subastacampo.v1.GetAutoBidRequest
+ */
+export type GetAutoBidRequest = Message<"subastacampo.v1.GetAutoBidRequest"> & {
+  /**
+   * @generated from field: string auction_id = 1;
+   */
+  auctionId: string;
+};
+
+/**
+ * Describes the message subastacampo.v1.GetAutoBidRequest.
+ * Use `create(GetAutoBidRequestSchema)` to create a new message.
+ */
+export const GetAutoBidRequestSchema: GenMessage<GetAutoBidRequest> = /*@__PURE__*/
+  messageDesc(file_subastacampo_v1_auction, 24);
+
+/**
+ * @generated from message subastacampo.v1.GetAutoBidResponse
+ */
+export type GetAutoBidResponse = Message<"subastacampo.v1.GetAutoBidResponse"> & {
+  /**
+   * Unset when the caller has no automatic bid on this auction.
+   *
+   * @generated from field: subastacampo.v1.AutoBid auto_bid = 1;
+   */
+  autoBid?: AutoBid | undefined;
+};
+
+/**
+ * Describes the message subastacampo.v1.GetAutoBidResponse.
+ * Use `create(GetAutoBidResponseSchema)` to create a new message.
+ */
+export const GetAutoBidResponseSchema: GenMessage<GetAutoBidResponse> = /*@__PURE__*/
+  messageDesc(file_subastacampo_v1_auction, 25);
+
+/**
  * @generated from enum subastacampo.v1.AuctionStatus
  */
 export enum AuctionStatus {
@@ -798,7 +951,39 @@ export const AuctionService: GenService<{
    * on payment and delivery: the winner gets the producer's, the producer gets
    * the winner's. Nobody else can ask, and nothing is revealed before the close,
    * so bidders cannot arrange a deal outside the auction.
+   * Sets (or replaces) the most the buyer will pay. The server then bids for
+   * them only what it takes to lead, up to that maximum, as rivals bid.
+   * The maximum is private: other participants only see the resulting bids.
+   * Buyers only. Fails with BID_TOO_LOW if the maximum cannot beat the price.
    *
+   * @generated from rpc subastacampo.v1.AuctionService.SetAutoBid
+   */
+  setAutoBid: {
+    methodKind: "unary";
+    input: typeof SetAutoBidRequestSchema;
+    output: typeof SetAutoBidResponseSchema;
+  },
+  /**
+   * Stops bidding automatically. Bids already placed stay.
+   *
+   * @generated from rpc subastacampo.v1.AuctionService.CancelAutoBid
+   */
+  cancelAutoBid: {
+    methodKind: "unary";
+    input: typeof CancelAutoBidRequestSchema;
+    output: typeof CancelAutoBidResponseSchema;
+  },
+  /**
+   * The caller's own automatic bid on an auction, if any.
+   *
+   * @generated from rpc subastacampo.v1.AuctionService.GetAutoBid
+   */
+  getAutoBid: {
+    methodKind: "unary";
+    input: typeof GetAutoBidRequestSchema;
+    output: typeof GetAutoBidResponseSchema;
+  },
+  /**
    * @generated from rpc subastacampo.v1.AuctionService.GetAuctionContact
    */
   getAuctionContact: {
