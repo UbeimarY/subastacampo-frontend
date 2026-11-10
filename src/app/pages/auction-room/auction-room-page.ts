@@ -30,8 +30,22 @@ import { FieldArt } from '../../shared/field-art';
 import { Freshness } from '../../shared/freshness';
 import { PriceChart } from '../../shared/price-chart';
 import { TimeBar } from '../../shared/time-bar';
+import { AutoBidPanel } from '../../shared/auto-bid-panel';
 
 const MAX_RETRIES = 2;
+const NOTIFY_KEY = 'subastacampo.notify-outbid';
+
+function readNotifyPreference(): boolean {
+  try {
+    return (
+      typeof Notification !== 'undefined' &&
+      Notification.permission === 'granted' &&
+      localStorage.getItem(NOTIFY_KEY) === '1'
+    );
+  } catch {
+    return false;
+  }
+}
 
 const CONNECTION_LABELS: Record<ConnectionState, string> = {
   connecting: 'Conectando…',
@@ -43,7 +57,16 @@ const CONNECTION_LABELS: Record<ConnectionState, string> = {
 
 @Component({
   selector: 'app-auction-room-page',
-  imports: [RouterLink, Countdown, ContactCard, FieldArt, Freshness, PriceChart, TimeBar],
+  imports: [
+    RouterLink,
+    AutoBidPanel,
+    Countdown,
+    ContactCard,
+    FieldArt,
+    Freshness,
+    PriceChart,
+    TimeBar,
+  ],
   templateUrl: './auction-room-page.html',
   styleUrl: './auction-room-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -128,6 +151,10 @@ export class AuctionRoomPage {
   protected readonly bidSuccess = signal<string | null>(null);
   /** Briefly true when a new top bid arrives: the board "beats". */
   protected readonly pulse = signal(false);
+  /** Set when the buyer goes from leading to outbid; cleared by bidding or dismissing. */
+  protected readonly outbidAlert = signal(false);
+  protected readonly canNotify = signal(typeof Notification !== 'undefined');
+  protected readonly notify = signal(readNotifyPreference());
 
   protected readonly formatCop = formatCop;
   protected readonly formatTime = formatTime;
@@ -157,6 +184,16 @@ export class AuctionRoomPage {
       lastMinimum = minimum;
     });
 
+    // Leading -> outbid: say it loudly, once per time it happens.
+    let lastStanding: 'leading' | 'outbid' | null = null;
+    effect(() => {
+      const standing = this.standing();
+      if (lastStanding === 'leading' && standing === 'outbid')
+        untracked(() => this.announceOutbid());
+      if (standing === 'leading') untracked(() => this.outbidAlert.set(false));
+      lastStanding = standing;
+    });
+
     // Pulse the board when a new bid tops the list (not on the first snapshot).
     let topBidId: string | undefined;
     let timer: ReturnType<typeof setTimeout> | undefined;
@@ -168,6 +205,40 @@ export class AuctionRoomPage {
         timer = setTimeout(() => this.pulse.set(false), 1200);
       }
       topBidId = top ?? '';
+    });
+  }
+
+  protected bidMinimum(): void {
+    this.amount.set(this.minimum().toString());
+    void this.placeBid();
+  }
+
+  /** Browser notifications, only after the buyer asks for them. */
+  protected async toggleNotify(): Promise<void> {
+    if (this.notify()) {
+      this.notify.set(false);
+    } else {
+      const permission =
+        Notification.permission === 'default'
+          ? await Notification.requestPermission()
+          : Notification.permission;
+      this.notify.set(permission === 'granted');
+    }
+    try {
+      localStorage.setItem(NOTIFY_KEY, this.notify() ? '1' : '0');
+    } catch {
+      // Storage blocked: the choice lasts until the page closes.
+    }
+  }
+
+  private announceOutbid(): void {
+    this.outbidAlert.set(true);
+    navigator.vibrate?.([120, 60, 120]);
+    if (!this.notify() || !document.hidden || Notification.permission !== 'granted') return;
+    const auction = this.auction();
+    new Notification('Te superaron en SubastaCampo', {
+      body: `${auction?.product?.name ?? 'Tu lote'}: la puja más alta es ${formatCop(auction?.currentPrice)}.`,
+      tag: `outbid-${auction?.id}`,
     });
   }
 
@@ -197,12 +268,21 @@ export class AuctionRoomPage {
     try {
       for (let attempt = 0; ; attempt++) {
         try {
-          await this.auctions.placeBid({
+          const response = await this.auctions.placeBid({
             auctionId: auction.id,
             amount: { currencyCode: 'COP', units: amount },
             requestId,
           });
-          this.bidSuccess.set(`Tu puja de ${formatCop(amount)} quedó registrada.`);
+          const price = response.auction?.currentPrice?.units ?? amount;
+          if (price > amount) {
+            // Another buyer's automatic bid answered in the same instant.
+            this.bidSuccess.set(
+              `Tu puja de ${formatCop(amount)} quedó registrada, pero una puja automática la superó al instante.`,
+            );
+            this.outbidAlert.set(true);
+          } else {
+            this.bidSuccess.set(`Tu puja de ${formatCop(amount)} quedó registrada.`);
+          }
           return;
         } catch (caught) {
           if (attempt < MAX_RETRIES && isTransient(caught)) continue;

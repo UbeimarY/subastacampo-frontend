@@ -97,7 +97,25 @@
       </div>
 
       <aside class="side">
-        @if (standing(); as standing) {
+        @if (outbidAlert() && standing() === 'outbid') {
+          <div class="outbid" role="alert">
+            <p class="outbid__title">¡Te superaron!</p>
+            <p>La puja más alta ahora es {{ formatCop(auction.currentPrice) }}.</p>
+            <div class="outbid__actions">
+              <button
+                type="button"
+                class="button button--bid"
+                (click)="bidMinimum()"
+                [disabled]="placing()"
+              >
+                Pujar {{ formatCop(minimum()) }}
+              </button>
+              <button type="button" class="button button--quiet" (click)="outbidAlert.set(false)">
+                Ahora no
+              </button>
+            </div>
+          </div>
+        } @else if (standing(); as standing) {
           <p class="standing" [class.standing--outbid]="standing === 'outbid'" role="status">
             @if (standing === 'leading') {
               <strong>Vas ganando.</strong> Tu puja es la más alta por ahora.
@@ -174,7 +192,18 @@
             <button class="button button--block button--bid" type="submit" [disabled]="placing()">
               {{ placing() ? 'Enviando puja…' : 'Pujar ' + amountLabel() }}
             </button>
+            @if (canNotify()) {
+              <button
+                type="button"
+                class="notify"
+                [attr.aria-pressed]="notify()"
+                (click)="toggleNotify()"
+              >
+                {{ notify() ? 'Te avisaremos si te superan' : 'Avisarme si me superan' }}
+              </button>
+            }
           </form>
+          <app-auto-bid-panel [auction]="auction" />
         } @else if (isActive()) {
           <div class="panel">
             @if (!session.isSignedIn()) {
@@ -214,6 +243,13 @@
               </span>
               <span class="bid-row__amount money">{{ formatCop(bid.amount) }}</span>
               <span class="bid-row__tags">
+                @if (bid.automatic) {
+                  <span
+                    class="tag tag--auto"
+                    title="La hizo el sistema dentro del máximo del postor"
+                    >Automática</span
+                  >
+                }
                 @if (bid.extendedClose) {
                   <span class="tag">Extendió el cierre</span>
                 }

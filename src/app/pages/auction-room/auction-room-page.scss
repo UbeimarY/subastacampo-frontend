@@ -386,3 +386,75 @@
   display: block;
   margin-top: 14px;
 }
+
+/* Outbid: the one moment the room raises its voice. */
+.outbid {
+  display: grid;
+  gap: 8px;
+  padding: 18px;
+  border-radius: var(--radius-m);
+  background: var(--barniz);
+  color: #fff;
+  animation: outbid-in 260ms ease-out;
+
+  p {
+    margin: 0;
+  }
+
+  .button--quiet {
+    color: #fff;
+    border-color: rgb(255 255 255 / 0.5);
+  }
+
+  .button--bid {
+    background: #fff;
+    color: var(--barniz);
+  }
+}
+
+.outbid__title {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 750;
+}
+
+.outbid__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+@keyframes outbid-in {
+  from {
+    transform: scale(0.97);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .outbid {
+    animation: none;
+  }
+}
+
+.notify {
+  font: inherit;
+  font-size: 0.9rem;
+  justify-self: center;
+  padding: 6px 10px;
+  border: none;
+  background: none;
+  color: var(--paramo-deep);
+  text-decoration: underline;
+  cursor: pointer;
+
+  &[aria-pressed='true'] {
+    text-decoration: none;
+    font-weight: 650;
+  }
+}
+
+.tag--auto {
+  background: var(--paramo-wash);
+  color: var(--paramo-deep);
+}
