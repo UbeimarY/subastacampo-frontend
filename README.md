@@ -18,7 +18,14 @@ This is the Angular client. The API lives in
   prices fell inside it") and **recent comparable sales**, then follow each bid with its risk
   score.
 - **Everyone** can check **Precios del mercado**: the typical price per kilo each category reached,
-  week by week.
+  week by week, updated live when an auction closes (with a once-a-minute fallback).
+
+## A Nariño identity
+
+The look comes from the region: lot cards are ploughed fields in each category's colour, as in
+the patchwork hills around Pasto; a band of **Barniz de Pasto** (mopa-mopa) inlay frames the app;
+the home page has the plaza's **pregón**, a ticker of live lots with the municipality they come
+from; the footer draws Galeras; and a closed sale gets its **¡Vendido!** seal.
 
 ## How it talks to the backend
 
