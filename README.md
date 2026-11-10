@@ -9,6 +9,17 @@ screen in real time.
 This is the Angular client. The API lives in
 [`subastacampo-backend`](https://github.com/UbeimarY/subastacampo-backend).
 
+## What you can do
+
+- **Buyers** follow every lot live, bid with one tap, or set a **puja automática**: a private
+  maximum the server bids up to, only what it takes to lead. When someone passes them, the room
+  says so loudly (banner, vibration and, if they asked, a browser notification).
+- **Producers** publish a harvest and get an AI price with a **calibrated range** ("8 in 10 final
+  prices fell inside it") and **recent comparable sales**, then follow each bid with its risk
+  score.
+- **Everyone** can check **Precios del mercado**: the typical price per kilo each category reached,
+  week by week.
+
 ## How it talks to the backend
 
 The backend is defined **contract-first** with Protocol Buffers. This app does not hand-write any
