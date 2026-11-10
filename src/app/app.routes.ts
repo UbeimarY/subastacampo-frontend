@@ -17,6 +17,11 @@ export const routes: Routes = [
       import('./pages/auction-room/auction-room-page').then((m) => m.AuctionRoomPage),
   },
   {
+    path: 'precios',
+    title: 'Precios del mercado · SubastaCampo',
+    loadComponent: () => import('./pages/market/market-page').then((m) => m.MarketPage),
+  },
+  {
     path: 'publicar',
     title: 'Publicar cosecha · SubastaCampo',
     canActivate: [roleGuard(UserRole.PRODUCER)],

@@ -1,0 +1,115 @@
+<section class="page">
+  <header class="intro">
+    <h1>Precios del mercado</h1>
+    <p>
+      Lo que pagaron por kilo las subastas que se vendieron en SubastaCampo. Úsalo para fijar el
+      precio de tu lote o tu puja máxima.
+    </p>
+    <div class="periods" role="group" aria-label="Periodo">
+      @for (option of periods; track option) {
+        <button
+          type="button"
+          class="period"
+          [attr.aria-pressed]="days() === option"
+          (click)="choose(option)"
+        >
+          Últimos {{ option }} días
+        </button>
+      }
+    </div>
+  </header>
+
+  @if (error()) {
+    <p class="alert" role="alert">{{ error() }}</p>
+  } @else if (markets(); as markets) {
+    @if (markets.length === 0) {
+      <div class="panel empty">
+        <p>Todavía no hay ventas en este periodo.</p>
+        <a class="button" routerLink="/">Ver subastas en vivo</a>
+      </div>
+    } @else {
+      <p class="summary">
+        {{ totalSales() }} ventas en {{ markets.length }}
+        {{ markets.length === 1 ? 'categoría' : 'categorías' }}.
+      </p>
+      <ul class="markets">
+        @for (market of markets; track market.category) {
+          <li class="panel market">
+            <div class="market__head">
+              <app-field-art class="market__art" [category]="market.category" />
+              <div>
+                <h2>{{ CATEGORY_LABELS[market.category] }}</h2>
+                <p class="market__sales">
+                  {{ market.sales }} {{ market.sales === 1 ? 'venta' : 'ventas' }}
+                </p>
+              </div>
+            </div>
+
+            <p class="market__price">
+              <span class="money">{{ formatCop(market.medianPricePerKg) }}</span>
+              <span class="market__unit">por kilo, valor típico</span>
+            </p>
+            <p class="market__range">
+              Entre {{ formatCop(market.lowestPricePerKg) }} y
+              {{ formatCop(market.highestPricePerKg) }}
+            </p>
+
+            @if (points(market); as points) {
+              @if (points.length > 1) {
+                <svg
+                  class="spark"
+                  [attr.viewBox]="'0 0 ' + width + ' ' + height"
+                  role="img"
+                  [attr.aria-label]="
+                    'Precio por kilo semana a semana en ' + CATEGORY_LABELS[market.category]
+                  "
+                  [style.--line]="lineColor(market)"
+                >
+                  <path class="spark__line" [attr.d]="path(points)" />
+                  @for (point of points; track $index) {
+                    <circle class="spark__dot" [attr.cx]="point.x" [attr.cy]="point.y" r="4">
+                      <title>{{ point.label }}</title>
+                    </circle>
+                  }
+                </svg>
+                <p class="spark__axis">
+                  <span>{{ formatDay(market.weeks[0].weekStart) }}</span>
+                  <span>Semana a semana, valor típico por kilo</span>
+                  <span>{{ formatDay(market.weeks[market.weeks.length - 1].weekStart) }}</span>
+                </p>
+              }
+            }
+
+            <details>
+              <summary>Ver semana a semana</summary>
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">Semana del</th>
+                    <th scope="col">Ventas</th>
+                    <th scope="col">Por kilo</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (week of market.weeks; track week.weekStart) {
+                    <tr>
+                      <td>{{ formatDay(week.weekStart) }}</td>
+                      <td>{{ week.sales }}</td>
+                      <td class="money">{{ formatCop(week.medianPricePerKg) }}</td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </details>
+          </li>
+        }
+      </ul>
+      <p class="note">
+        Valor típico = mediana: la mitad de las ventas pagó menos y la otra mitad más, así un lote
+        raro no mueve el precio.
+      </p>
+    }
+  } @else {
+    <p class="empty" role="status">Cargando precios…</p>
+  }
+</section>
