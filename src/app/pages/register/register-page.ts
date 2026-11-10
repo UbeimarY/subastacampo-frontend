@@ -5,6 +5,7 @@ import { Router, RouterLink } from '@angular/router';
 import { AUTH_CLIENT } from '../../core/api/clients';
 import { describeError } from '../../core/api/errors';
 import { SessionStore } from '../../core/auth/session.store';
+import { NARINO_MUNICIPALITIES } from '../../core/narino';
 import { UserRole } from '../../gen/subastacampo/v1/common_pb';
 import { Hillside } from '../../shared/hillside';
 
@@ -16,6 +17,7 @@ import { Hillside } from '../../shared/hillside';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegisterPage {
+  protected readonly municipalities = NARINO_MUNICIPALITIES;
   private readonly auth = inject(AUTH_CLIENT);
   private readonly session = inject(SessionStore);
   private readonly router = inject(Router);

@@ -87,7 +87,22 @@
         </div>
         <div class="field">
           <label for="municipality">Municipio <span class="hint">(opcional)</span></label>
-          <input id="municipality" formControlName="municipality" autocomplete="address-level2" />
+          <input
+            id="municipality"
+            formControlName="municipality"
+            autocomplete="address-level2"
+            list="narino-municipalities"
+            aria-describedby="municipality-hint"
+          />
+          <datalist id="narino-municipalities">
+            @for (name of municipalities; track name) {
+              <option [value]="name"></option>
+            }
+          </datalist>
+          <span class="hint" id="municipality-hint"
+            >Tus lotes aparecerán como «Desde
+            {{ form.controls.municipality.value || 'tu municipio' }}».</span
+          >
         </div>
       </div>
 
