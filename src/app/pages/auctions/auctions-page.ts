@@ -21,6 +21,7 @@ import { ProductCategory } from '../../gen/subastacampo/v1/common_pb';
 import { Countdown } from '../../shared/countdown';
 import { FieldArt } from '../../shared/field-art';
 import { Freshness } from '../../shared/freshness';
+import { Pregon } from '../../shared/pregon';
 import { Hillside } from '../../shared/hillside';
 import { TimeBar } from '../../shared/time-bar';
 
@@ -33,7 +34,7 @@ const REFRESH_MS = 15_000;
 
 @Component({
   selector: 'app-auctions-page',
-  imports: [RouterLink, Countdown, FieldArt, Freshness, Hillside, TimeBar],
+  imports: [RouterLink, Countdown, FieldArt, Freshness, Hillside, Pregon, TimeBar],
   templateUrl: './auctions-page.html',
   styleUrl: './auctions-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -95,6 +96,13 @@ export class AuctionsPage {
   });
 
   /** What is happening right now, for the board's header. */
+  /** Live lots for the pregón, closing soonest first. */
+  protected readonly liveLots = computed(() =>
+    this.items()
+      .filter((auction) => auction.status === AuctionStatus.ACTIVE)
+      .slice(0, 12),
+  );
+
   protected readonly stats = computed(() => {
     const live = this.tab() === 'live' ? this.items() : [];
     const now = this.clock.now();

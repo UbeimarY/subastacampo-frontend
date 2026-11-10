@@ -40,6 +40,9 @@
       <app-hillside class="hero__art" [live]="stats().lots > 0" />
     </div>
   </section>
+  @if (tab() === 'live' && liveLots().length > 1) {
+    <app-pregon [auctions]="liveLots()" />
+  }
 }
 
 <section class="page">
@@ -214,6 +217,20 @@
                 {{ formatQuantity(auction.product?.quantity ?? 0, auction.product?.unit ?? 0) }}
                 · {{ CATEGORY_LABELS[auction.product?.category ?? 0] }}
               </p>
+              @if (auction.product?.origin) {
+                <p class="card__origin">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                      d="M12 21s-6-5.6-6-11a6 6 0 0 1 12 0c0 5.4-6 11-6 11Z"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    />
+                    <circle cx="12" cy="10" r="2.2" fill="currentColor" />
+                  </svg>
+                  Desde {{ auction.product?.origin }}
+                </p>
+              }
               @if (auction.status === AuctionStatus.ACTIVE) {
                 <app-freshness
                   [remaining]="auction.product?.remainingShelfLifeDays ?? 0"
