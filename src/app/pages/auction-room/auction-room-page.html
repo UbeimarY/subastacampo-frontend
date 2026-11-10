@@ -17,6 +17,9 @@
           {{ formatDay(auction.product?.harvestDate) }} · {{ auction.product?.shelfLifeDays }} días
           de vida útil
         </p>
+        @if (auction.product?.origin) {
+          <p class="lot__origin">Desde {{ auction.product?.origin }}, Nariño</p>
+        }
         <app-freshness
           [remaining]="auction.product?.remainingShelfLifeDays ?? 0"
           [total]="auction.product?.shelfLifeDays ?? 0"
@@ -45,6 +48,9 @@
             }
           </p>
           <p class="board__price money" aria-live="polite">{{ formatCop(auction.currentPrice) }}</p>
+          @if (!isActive() && auction.winnerId) {
+            <span class="sold" aria-hidden="true">¡Vendido!</span>
+          }
           @if (pricePerKg(); as perKg) {
             <p class="board__per-kg">{{ formatCop(perKg) }} por kilo</p>
           }
