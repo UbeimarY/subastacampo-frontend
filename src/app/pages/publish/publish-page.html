@@ -141,9 +141,26 @@
               <span>{{ formatCop(suggestion.rangeMax) }}</span>
             </figcaption>
             <p class="hint">
-              Rango probable que estima el modelo para lotes parecidos (percentiles 10 y 90).
+              En pruebas con lotes que el modelo nunca vio,
+              {{ coverageInTen(suggestion.rangeCoverage) }} de cada 10 precios finales cayeron en
+              este rango.
             </p>
           </figure>
+
+          @if (suggestion.comparables.length > 0) {
+            <h3>Ventas parecidas en SubastaCampo</h3>
+            <ul class="comparables">
+              @for (sale of suggestion.comparables; track $index) {
+                <li>
+                  <span class="comparables__what">
+                    <strong>{{ sale.productName }}</strong>
+                    {{ formatNumber(sale.quantityKg) }} kg · {{ formatDate(sale.closedAt) }}
+                  </span>
+                  <span class="money">{{ formatCop(sale.pricePerKg) }}/kg</span>
+                </li>
+              }
+            </ul>
+          }
 
           @if (suggestion.factors.length > 0) {
             <h3>Por qué este precio</h3>

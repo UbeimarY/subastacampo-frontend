@@ -13,7 +13,14 @@ import { Router, RouterLink } from '@angular/router';
 
 import { AUCTION_CLIENT, CATALOG_CLIENT } from '../../core/api/clients';
 import { describeError } from '../../core/api/errors';
-import { formatCop, formatNumber, localIsoDate, parsePesos, roundPesos } from '../../core/format';
+import {
+  formatCop,
+  formatNumber,
+  formatShortDate,
+  localIsoDate,
+  parsePesos,
+  roundPesos,
+} from '../../core/format';
 import {
   CATEGORY_LABELS,
   CATEGORY_OPTIONS,
@@ -55,6 +62,11 @@ export class PublishPage {
   protected readonly step = signal<Step>('product');
   protected readonly product = signal<Product | null>(null);
   protected readonly suggestion = signal<PriceSuggestion | null>(null);
+  protected readonly formatDate = formatShortDate;
+  /** 0.8 -> 8: "8 de cada 10" reads better than a percentage on a phone. */
+  protected coverageInTen(coverage: number): number {
+    return Math.round((coverage || 0.8) * 10);
+  }
   protected readonly busy = signal(false);
   protected readonly error = signal<string | null>(null);
   protected readonly suggestionError = signal<string | null>(null);

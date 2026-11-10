@@ -55,6 +55,13 @@ export function formatDay(isoDate: string | undefined): string {
   return year && month && day ? DAY.format(new Date(year, month - 1, day)) : isoDate;
 }
 
+const SHORT_DATE = new Intl.DateTimeFormat('es-CO', { day: 'numeric', month: 'short' });
+
+/** "3 nov.", from a contract timestamp. */
+export function formatShortDate(timestamp: Timestamp | undefined): string {
+  return timestamp ? SHORT_DATE.format(timestampDate(timestamp)) : '';
+}
+
 /** Today's date as YYYY-MM-DD in the user's own time zone (not UTC). */
 export function localIsoDate(date = new Date()): string {
   const month = String(date.getMonth() + 1).padStart(2, '0');
