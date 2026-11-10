@@ -1,14 +1,23 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  inject,
+  signal,
+  untracked,
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import { CATALOG_CLIENT } from '../../core/api/clients';
-import { describeError } from '../../core/api/errors';
 import { formatCop, formatDay } from '../../core/format';
+import { openMarketFeed, type MarketFeed } from '../../core/live/market-feed';
 import { CATEGORY_LABELS } from '../../core/labels';
 import type { CategoryMarket } from '../../gen/subastacampo/v1/catalog_pb';
 import { ProductCategory } from '../../gen/subastacampo/v1/common_pb';
 import { FieldArt } from '../../shared/field-art';
 
+const CLOCK = new Intl.DateTimeFormat('es-CO', { hour: 'numeric', minute: '2-digit' });
 const WIDTH = 280;
 const HEIGHT = 72;
 
@@ -44,8 +53,13 @@ export class MarketPage {
 
   protected readonly periods = [30, 60, 90] as const;
   protected readonly days = signal<number>(60);
-  protected readonly markets = signal<CategoryMarket[] | null>(null);
-  protected readonly error = signal<string | null>(null);
+  private readonly feed = signal<MarketFeed | null>(null);
+  protected readonly markets = computed(() => this.feed()?.categories() ?? null);
+  protected readonly error = computed(() => this.feed()?.error() ?? null);
+  protected readonly mode = computed(() => this.feed()?.mode() ?? 'connecting');
+  protected readonly updatedAt = computed(() => this.feed()?.updatedAt() ?? null);
+  /** Categories whose typical price just changed: their card flashes once. */
+  protected readonly changed = signal<ReadonlySet<number>>(new Set());
   protected readonly totalSales = computed(() =>
     (this.markets() ?? []).reduce((sum, market) => sum + market.sales, 0),
   );
@@ -57,12 +71,37 @@ export class MarketPage {
   protected readonly height = HEIGHT;
 
   constructor() {
-    void this.load();
+    // One feed per period; leaving the page or changing the period closes it.
+    effect((onCleanup) => {
+      const feed = openMarketFeed(this.catalog, this.days());
+      untracked(() => this.feed.set(feed));
+      onCleanup(() => feed.close());
+    });
+
+    let previous = new Map<number, bigint>();
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    effect(() => {
+      const markets = this.markets() ?? [];
+      const current = new Map(markets.map((m) => [m.category, m.medianPricePerKg?.units ?? 0n]));
+      const moved = markets
+        .filter(
+          (m) => previous.has(m.category) && previous.get(m.category) !== current.get(m.category),
+        )
+        .map((m) => m.category);
+      previous = current;
+      if (moved.length === 0) return;
+      untracked(() => this.changed.set(new Set(moved)));
+      clearTimeout(timer);
+      timer = setTimeout(() => this.changed.set(new Set()), 2400);
+    });
   }
 
   protected choose(days: number): void {
     this.days.set(days);
-    void this.load();
+  }
+
+  protected formatClock(date: Date): string {
+    return CLOCK.format(date);
   }
 
   /** Weekly medians as a line in the card's own scale. */
@@ -88,15 +127,5 @@ export class MarketPage {
 
   protected lineColor(market: CategoryMarket): string {
     return FIELD_COLORS[market.category] ?? 'var(--paramo)';
-  }
-
-  private async load(): Promise<void> {
-    this.error.set(null);
-    try {
-      const response = await this.catalog.getMarketPrices({ days: this.days() });
-      this.markets.set(response.categories);
-    } catch (caught) {
-      this.error.set(describeError(caught).message);
-    }
   }
 }

@@ -172,3 +172,53 @@ th:first-child,
 td:first-child {
   text-align: left;
 }
+
+.feed {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 6px;
+  font-size: 0.9rem;
+}
+
+.feed--live {
+  color: var(--paramo-deep);
+  font-weight: 650;
+}
+
+.feed__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--barniz);
+  animation: feed-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes feed-pulse {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+/* A price that just moved: the card glows once in maize. */
+.market--changed {
+  animation: market-moved 2.4s ease-out;
+}
+
+@keyframes market-moved {
+  0%,
+  30% {
+    box-shadow: 0 0 0 3px var(--maize);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .feed__dot,
+  .market--changed {
+    animation: none;
+  }
+
+  .market--changed {
+    box-shadow: 0 0 0 3px var(--maize);
+  }
+}

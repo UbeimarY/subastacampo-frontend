@@ -31,10 +31,23 @@
       <p class="summary">
         {{ totalSales() }} ventas en {{ markets.length }}
         {{ markets.length === 1 ? 'categoría' : 'categorías' }}.
+        <span class="feed" [class.feed--live]="mode() === 'live'" role="status">
+          @if (mode() === 'live') {
+            <span class="feed__dot" aria-hidden="true"></span> En vivo: cambia apenas cierra una
+            subasta
+          } @else if (mode() === 'polling') {
+            Se actualiza cada minuto
+          } @else {
+            Conectando…
+          }
+          @if (updatedAt(); as at) {
+            · {{ formatClock(at) }}
+          }
+        </span>
       </p>
       <ul class="markets">
         @for (market of markets; track market.category) {
-          <li class="panel market">
+          <li class="panel market" [class.market--changed]="changed().has(market.category)">
             <div class="market__head">
               <app-field-art class="market__art" [category]="market.category" />
               <div>
